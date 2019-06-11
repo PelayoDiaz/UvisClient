@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Notaneitor</title>
+<meta charset="utf-8" />
+</head>
+<body>
+	<div class="container">
+		<h1>List Thymeleaf</h1>
+		<div th:each="mark : ${markList}">
+			<p>
+				<span th:text="${mark.id}"></span> <span
+					th:text="${mark.description}"></span> <span th:text="${mark.score}"></span>
+				<a th:href="${'/mark/details/' + mark.id}">details</a> <a
+					th:href="${'/mark/delete/' + mark.id}">delete</a>
+			</p>
+		</div>
+		<div th:if="${#lists.isEmpty(markList)}">No marks</div>
+	</div>
+</body>
+</html>
