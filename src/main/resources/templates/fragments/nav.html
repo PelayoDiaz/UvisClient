@@ -10,15 +10,15 @@
 			<img src="/img/student-48.png" alt="logo" />
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li><a href="/" th:text="#{home}"></a></li>
 				<li id="wallets-menu" class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" th:text="#{wallet.management}"> <span
 						class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="/wallet/list" th:text="#{wallet.view.list}">Ver Notas</a></li>
-						<li><a href="/wallet/add" th:text="#{wallet.add}">Agregar Nota</a></li>
+						<li><a href="/wallet/list" th:text="#{wallet.view.list}"></a></li>
+						<li><a href="/wallet/add" th:text="#{wallet.add}"></a></li>
 					</ul></li>
 				<li id="users-menu" class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" th:text="#{transaction.management}"><span
@@ -52,12 +52,20 @@
 						</a></li>
 					</ul>
 				</li>
-				<li><a href="/signup"> <span
-						class="glyphicon glyphicon-user"></span> Registrate
+				<li sec:authorize="!isAuthenticated()">
+				<a href="/signup"> 
+					<span class="glyphicon glyphicon-user"></span>
+					<span th:text="#{signup.menu}" ></span>
 				</a></li>
-				<li><a href="/login" >
+				<li sec:authorize="!isAuthenticated()">
+				<a href="/login" >
 						<span class="glyphicon glyphicon-log-in" ></span>
 						<span th:text="#{login.menu}" ></span>
+				</a></li>
+				<li sec:authorize="isAuthenticated()"> 
+				<a href="/logout" > 
+					<span class="glyphicon glyphicon-log-out"></span>
+					<span th:text="#{logOut.menu}" ></span>
 				</a></li>
 			</ul>
 		</div>
