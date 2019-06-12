@@ -28,10 +28,6 @@ public class UserService {
 		return users;
 	}
 
-//	public User getUser(Long id) {
-//		return usersRepository.findOne(id);
-//	}
-
 	public void addUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		usersRepository.save(user);
@@ -40,8 +36,4 @@ public class UserService {
 	public User getUserByUsername(String username) {
 		return this.usersRepository.findByUsername(username);
 	}
-
-//	public void deleteUser(Long id) {
-//		usersRepository.delete(id);
-//	}
 }

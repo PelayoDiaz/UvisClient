@@ -15,7 +15,7 @@ public class InsertSampleDataService {
 
 	@PostConstruct
 	public void init() {
-		User user1 = new User("pedrods", "Pedro", "Díaz", "Suarez");
+		User user1 = new User("uo251000", "Pelayo", "Díaz", "Soto");
 		user1.setPassword("123456");
 		User user2 = new User("99999991B", "Lucas", "Núñez", "Soto");
 		user2.setPassword("123456");
