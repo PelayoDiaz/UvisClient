@@ -11,24 +11,26 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
-				<li><a href="/" th:text="#{home}"></a></li>
-				<li id="wallets-menu" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#" th:text="#{wallet.management}"> <span
-						class="caret"></span>
-				</a>
+				<li ><a href="/" th:text="#{home}"></a></li>
+				<li id="wallets-menu" class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<span th:text="#{wallet.management}"></span> 
+						<span class="caret"></span>
+					</a>
 					<ul class="dropdown-menu">
 						<li><a href="/wallet/list" th:text="#{wallet.view.list}"></a></li>
 						<li><a href="/wallet/add" th:text="#{wallet.add}"></a></li>
 					</ul></li>
-				<li id="users-menu" class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#" th:text="#{transaction.management}"><span
-						class="caret"></span>
-				</a>
+				<li id="transactionsMenu" class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<span th:text="#{transaction.management}"></span> 
+						<span class="caret"></span>
+					</a>
 					<ul class="dropdown-menu">
 						<li><a href="/transaction/list" th:text="#{transaction.view.list}"></a></li>
 						<li><a href="/transaction/add" th:text="#{transaction.add}"></a></li>						
 					</ul></li>
-				<li><a href="/" th:text="#{user.view.list}"></a></li>
+				<li><a href="/user/list" th:text="#{user.view.list}"></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">

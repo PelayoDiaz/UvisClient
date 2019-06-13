@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.Wallet;
+import com.uniovi.UvisClient.services.UserService;
 import com.uniovi.UvisClient.services.WalletService;
+import com.uniovi.UvisClient.services.security.SecurityService;
 import com.uniovi.UvisClient.validator.WalletFormValidator;
 
 @Controller
@@ -19,7 +22,13 @@ public class WalletController {
 	private WalletFormValidator walletFormValidator;
 	
 	@Autowired
+	private SecurityService securityService;
+	
+	@Autowired
 	private WalletService walletService;
+	
+	@Autowired 
+	private UserService userService;
 
 	@RequestMapping(value = "/wallet/add", method = RequestMethod.GET)
 	public String addWalletView(Model model) {
@@ -33,9 +42,17 @@ public class WalletController {
 		if (result.hasErrors()) {
 			return "wallet/create";
 		}
-		
-//		this.walletService.addWallet();
-		return "wallet/create";
+		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
+		wallet.setUser(user);
+		this.walletService.addWallet(wallet);
+		return "wallet/list";
+	}
+	
+	@RequestMapping(value = "/wallet/list", method = RequestMethod.GET)
+	public String getWalletsList(Model model) {
+		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
+		model.addAttribute("walletList", user.getWallets());
+		return "wallet/list";
 	}
 
 }
