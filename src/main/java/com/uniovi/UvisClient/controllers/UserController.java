@@ -33,8 +33,8 @@ public class UserController {
 	private SignUpFormValidator signUpFormValidator;
 
 	@RequestMapping("/")
-	public String getList(Model model) {
-		return "login";
+	public String getIndex(Model model) {
+		return "redirect:login";
 	}
 
 	@RequestMapping("/user/list")
@@ -45,13 +45,8 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
-		this.chainService.send(new BlockChainDto(), UvisClientApplication.initNode.getUrl(), new BlockChainSessionHandler(), "/chain/sendChain");
+		this.chainService.send(new BlockChainDto(), UvisClientApplication.initNode.getUrl(), new BlockChainSessionHandler(), "/app/chain/sendChain");
 		return "login";
-	}
-	
-	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
-	public String home(Model model) {
-		return "home";
 	}
 	
 	@RequestMapping(value = { "/signup" }, method = RequestMethod.GET)

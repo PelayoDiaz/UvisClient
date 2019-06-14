@@ -27,10 +27,12 @@ public class BlockChainService {
 		httpSession.setAttribute(SESSION_DTO, dto);
 	}
 	
-	public void send(AbstractDto dto, String url, StompSessionHandlerAdapter handler, String listener) {
+	public synchronized void send(AbstractDto dto, String url, StompSessionHandlerAdapter handler, String listener) {
 		try {
 			StompSession session = Connection.initialize(url, handler);
-			session.send(listener, dto);
+//			synchronized(this) {
+				session.send(listener, dto);
+//			}
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

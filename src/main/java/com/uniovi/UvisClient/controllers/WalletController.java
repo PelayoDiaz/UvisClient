@@ -8,11 +8,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.uniovi.UvisClient.UvisClientApplication;
+import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.Wallet;
+import com.uniovi.UvisClient.services.BlockChainService;
 import com.uniovi.UvisClient.services.UserService;
 import com.uniovi.UvisClient.services.WalletService;
 import com.uniovi.UvisClient.services.security.SecurityService;
+import com.uniovi.UvisClient.util.DtoConverter;
 import com.uniovi.UvisClient.validator.WalletFormValidator;
 
 @Controller
@@ -29,6 +33,9 @@ public class WalletController {
 	
 	@Autowired 
 	private UserService userService;
+	
+	@Autowired
+	private BlockChainService chainService;
 
 	@RequestMapping(value = "/wallet/add", method = RequestMethod.GET)
 	public String addWalletView(Model model) {
@@ -45,6 +52,7 @@ public class WalletController {
 		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
 		wallet.setUser(user);
 		this.walletService.addWallet(wallet);
+		this.chainService.send(DtoConverter.toDto(wallet), UvisClientApplication.initNode.getUrl(), new BlockChainSessionHandler(), "/app/chain/createWallet");
 		return "wallet/list";
 	}
 	

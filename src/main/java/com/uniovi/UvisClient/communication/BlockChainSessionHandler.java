@@ -7,7 +7,9 @@ import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
+import org.springframework.stereotype.Component;
 
+import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.dto.BlockChainDto;
 import com.uniovi.UvisClient.services.BlockChainService;
 
@@ -18,9 +20,6 @@ public class BlockChainSessionHandler extends StompSessionHandlerAdapter {
 	private Logger logger = LogManager.getLogger(BlockChainSessionHandler.class);
 	
 	private StompSession session;
-	
-	@Autowired
-	private BlockChainService blockChainService;
 
     @Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
@@ -41,11 +40,11 @@ public class BlockChainSessionHandler extends StompSessionHandlerAdapter {
     }
 
     @Override
-    public void handleFrame(StompHeaders headers, Object payload) {
+    public synchronized void handleFrame(StompHeaders headers, Object payload) {
     	
     	BlockChainDto chain = (BlockChainDto) payload;
     	if (chain != null) {
-    		this.blockChainService.setBlockChain(chain);
+    		BlockChain.getInstance().update(chain);
     		logger.info("Chain obtained successfully. Ready to make operations!");
     	} else {
     		logger.info("Something went wrong while getting de chain.");
