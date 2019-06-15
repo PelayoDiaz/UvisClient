@@ -6,14 +6,14 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.uniovi.UvisClient.entities.Wallet;
-import com.uniovi.UvisClient.services.WalletService;
+import com.uniovi.UvisClient.services.impl.WalletServiceImpl;
 import com.uniovi.UvisClient.services.security.SecurityService;
 
 @Component
 public class WalletFormValidator implements Validator {
 
 	@Autowired
-	private WalletService walletService;
+	private WalletServiceImpl walletService;
 	
 	@Autowired
 	private SecurityService securityService;

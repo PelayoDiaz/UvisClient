@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.dto.BlockChainDto;
-import com.uniovi.UvisClient.services.BlockChainService;
+import com.uniovi.UvisClient.services.impl.BlockChainServiceImpl;
 
 import java.lang.reflect.Type;
 

@@ -12,9 +12,9 @@ import com.uniovi.UvisClient.UvisClientApplication;
 import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.Wallet;
-import com.uniovi.UvisClient.services.BlockChainService;
 import com.uniovi.UvisClient.services.UserService;
-import com.uniovi.UvisClient.services.WalletService;
+import com.uniovi.UvisClient.services.impl.BlockChainServiceImpl;
+import com.uniovi.UvisClient.services.impl.WalletServiceImpl;
 import com.uniovi.UvisClient.services.security.SecurityService;
 import com.uniovi.UvisClient.util.DtoConverter;
 import com.uniovi.UvisClient.validator.WalletFormValidator;
@@ -29,13 +29,13 @@ public class WalletController {
 	private SecurityService securityService;
 	
 	@Autowired
-	private WalletService walletService;
+	private WalletServiceImpl walletService;
 	
 	@Autowired 
 	private UserService userService;
 	
 	@Autowired
-	private BlockChainService chainService;
+	private BlockChainServiceImpl chainService;
 
 	@RequestMapping(value = "/wallet/add", method = RequestMethod.GET)
 	public String addWalletView(Model model) {
@@ -53,7 +53,7 @@ public class WalletController {
 		wallet.setUser(user);
 		this.walletService.addWallet(wallet);
 		this.chainService.send(DtoConverter.toDto(wallet), UvisClientApplication.initNode.getUrl(), new BlockChainSessionHandler(), "/app/chain/createWallet");
-		return "wallet/list";
+		return "redirect:wallet/list";
 	}
 	
 	@RequestMapping(value = "/wallet/list", method = RequestMethod.GET)

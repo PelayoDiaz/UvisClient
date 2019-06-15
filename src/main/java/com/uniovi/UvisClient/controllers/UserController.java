@@ -12,8 +12,8 @@ import com.uniovi.UvisClient.UvisClientApplication;
 import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.dto.BlockChainDto;
-import com.uniovi.UvisClient.services.BlockChainService;
 import com.uniovi.UvisClient.services.UserService;
+import com.uniovi.UvisClient.services.impl.BlockChainServiceImpl;
 import com.uniovi.UvisClient.services.security.SecurityService;
 import com.uniovi.UvisClient.validator.SignUpFormValidator;
 
@@ -27,7 +27,7 @@ public class UserController {
 	private SecurityService securityService;
 	
 	@Autowired
-	private BlockChainService chainService;
+	private BlockChainServiceImpl chainService;
 	
 	@Autowired 
 	private SignUpFormValidator signUpFormValidator;
