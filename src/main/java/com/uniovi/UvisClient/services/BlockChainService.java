@@ -7,6 +7,7 @@ import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.dto.AbstractDto;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
+import com.uniovi.UvisClient.entities.dto.WalletDto;
 
 public interface BlockChainService {
 
@@ -43,5 +44,15 @@ public interface BlockChainService {
 	 * 			The list of transactions received by a user
 	 */
 	public List<TransactionDto> getReceivedTransactions(User user);
+	
+	/**
+	 * Returns a wallet by its address if it is contained into the blockchain.
+	 * 
+	 * @param address
+	 * 			The address of the wallet
+	 * @return WalletDto
+	 * 			The found wallet
+	 */
+	public WalletDto getWalletByAddress(String address);
 
 }

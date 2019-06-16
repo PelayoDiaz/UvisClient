@@ -31,4 +31,9 @@ public class WalletServiceImpl implements WalletService {
 		this.walletRepository.save(wallet);
 	}
 
+	@Override
+	public Wallet getWalletByAddress(String address) {
+		return this.walletRepository.findByAddress(address);
+	}
+
 }

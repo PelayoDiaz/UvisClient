@@ -75,5 +75,11 @@ public class BlockChain {
 				.filter(y -> y.receiver.equals(address)).collect(Collectors.toList())));
 		return sentTransactions;
 	}
+	
+	public WalletDto getWallet(String address) {
+		return this.blockChainDto.wallets.stream()
+				.filter(x -> x.address.equals(address)).findFirst()
+				.orElse(null);
+	}
 
 }

@@ -17,6 +17,7 @@ import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.dto.AbstractDto;
 import com.uniovi.UvisClient.entities.dto.BlockChainDto;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
+import com.uniovi.UvisClient.entities.dto.WalletDto;
 import com.uniovi.UvisClient.services.BlockChainService;
 
 @Service
@@ -61,6 +62,11 @@ public class BlockChainServiceImpl implements BlockChainService {
 		List<TransactionDto> sentTransactions = new ArrayList<TransactionDto>();
 		user.getWallets().forEach(x -> sentTransactions.addAll(BlockChain.getInstance().getReceivedTransactionsByAddress(x.getAddress())));
 		return sentTransactions;
+	}
+
+	@Override
+	public WalletDto getWalletByAddress(String address) {
+		return BlockChain.getInstance().getWallet(address);
 	}
 
 }

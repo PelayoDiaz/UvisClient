@@ -5,7 +5,7 @@ import com.uniovi.UvisClient.entities.Wallet;
 public interface WalletService {
 
 	/**
-	 * Find an existing wallet searching it by name and username.
+	 * Finds an existing wallet searching it by name and username.
 	 * 
 	 * @param name
 	 * 			The wallet's anme given by the user.
@@ -24,4 +24,15 @@ public interface WalletService {
 	 * 			The wallet to be stored.
 	 */
 	public void addWallet(Wallet wallet);
+	
+	/**
+	 * Searches a wallet by its address.
+	 * 
+	 * @param address
+	 * 
+	 * 
+	 * @return Wallet
+	 * 			The found wallet
+	 */
+	public Wallet getWalletByAddress(String address);
 }

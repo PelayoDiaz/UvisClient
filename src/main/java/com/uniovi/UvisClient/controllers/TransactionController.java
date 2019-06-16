@@ -47,7 +47,7 @@ public class TransactionController {
 	}
 	
 	@RequestMapping(value = "/transaction/add", method = RequestMethod.GET)
-	public String addWalletView(Model model) {
+	public String addTransactionView(Model model) {
 		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
 		model.addAttribute("transaction", new TransactionDto());
 		model.addAttribute("walletsList", user.getWallets());
@@ -55,12 +55,12 @@ public class TransactionController {
 	}
 	
 	@RequestMapping(value = "/transaction", method = RequestMethod.POST)
-	public String addWallet(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
+	public String addTransaction(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
 		this.transactionFormValidator.validate(transaction, result);
 		if (result.hasErrors()) {
-			return "wallet/create";
+			return "redirect:transaction/add";
 		}
-		
+		this.chainService.send(transaction, UvisClientApplication.initNode.getUrl(), new BlockChainSessionHandler(), "/app/chain/createTransaction");
 		return "redirect:transaction/list";
 	}
 
