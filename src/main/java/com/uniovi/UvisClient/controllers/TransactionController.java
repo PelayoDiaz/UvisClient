@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.UvisClient.UvisClientApplication;
 import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
+import com.uniovi.UvisClient.communication.Sender;
 import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.User;
-import com.uniovi.UvisClient.entities.Wallet;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.services.BlockChainService;
 import com.uniovi.UvisClient.services.UserService;
 import com.uniovi.UvisClient.services.security.SecurityService;
-import com.uniovi.UvisClient.util.DtoConverter;
 import com.uniovi.UvisClient.validator.TransactionFormValidator;
 
 @Controller
@@ -60,7 +59,8 @@ public class TransactionController {
 		if (result.hasErrors()) {
 			return "redirect:transaction/add";
 		}
-		this.chainService.send(transaction, UvisClientApplication.initNode.getUrl(), new BlockChainSessionHandler(), "/app/chain/createTransaction");
+		Sender sender = new Sender(transaction, UvisClientApplication.initNode.getUrl(), new BlockChainSessionHandler(), "/app/chain/createTransaction");
+		sender.start();
 		return "redirect:transaction/list";
 	}
 

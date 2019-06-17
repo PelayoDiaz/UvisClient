@@ -10,20 +10,6 @@ import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.entities.dto.WalletDto;
 
 public interface BlockChainService {
-
-	/**
-	 * Method to communicate with the blockchain protocol where the chain is stored.
-	 * 
-	 * @param dto
-	 * 			The information in a dto to send
-	 * @param url
-	 * 			The url of the node to connect
-	 * @param handler
-	 * 			The handler of the sessions established
-	 * @param listener
-	 * 			The listener where the node is listening
-	 */
-	public void send(AbstractDto dto, String url, StompSessionHandlerAdapter handler, String listener);
 	
 	/**
 	 * Returns a list of the processed transactions sent by a user.
