@@ -2,10 +2,10 @@ package com.uniovi.UvisClient.entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.uniovi.UvisClient.entities.dto.BlockChainDto;
+import com.uniovi.UvisClient.entities.dto.Node;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.entities.dto.WalletDto;
 
@@ -15,6 +15,8 @@ public class BlockChain {
 	private static BlockChain singleChain;
 	
 	private BlockChainDto blockChainDto;
+	
+	private Node actualNode;
 	
 	public static BlockChain getInstance() {
 		if (singleChain == null) {
@@ -45,12 +47,12 @@ public class BlockChain {
 	}
 	
 	/**
-	 * Returns the actual number of conected nodes in the chain.
+	 * Returns the actual number of connected nodes in the chain.
 	 * 
 	 * @return Integer
-	 * 			The number of conected nodes in the chain
+	 * 			The number of connected nodes in the chain
 	 */
-	public int getConectedNodes() {
+	public int getConnectedNodes() {
 		return this.blockChainDto.nodes.size();
 	}
 	
@@ -80,6 +82,33 @@ public class BlockChain {
 		return this.blockChainDto.wallets.stream()
 				.filter(x -> x.address.equals(address)).findFirst()
 				.orElse(null);
+	}
+
+	/**
+	 * @return the actualNode
+	 */
+	public Node getActualNode() {
+		return actualNode;
+	}
+	
+	/**
+	 * @param actualNode the actualNode to set
+	 */
+	public void setActualNode(Node actualNode) {
+		this.actualNode = actualNode;
+	}
+
+	public Node getNextNode() {
+		BlockChain.getInstance().blockChainDto.nodes.remove(actualNode);
+		Node nextNode = this.blockChainDto.nodes.stream()
+				.filter(x -> !x.getUrl().equals(actualNode.getUrl())).findFirst()
+				.orElse(actualNode);
+		this.actualNode = nextNode;
+		return nextNode;
+	}
+	
+	public List<Node> getNodes() {
+		return (this.blockChainDto==null) ? null : new ArrayList<Node>(this.blockChainDto.nodes);
 	}
 
 }

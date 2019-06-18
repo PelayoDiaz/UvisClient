@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.uniovi.UvisClient.UvisClientApplication;
 import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
 import com.uniovi.UvisClient.communication.Sender;
 import com.uniovi.UvisClient.entities.BlockChain;
@@ -21,6 +20,8 @@ import com.uniovi.UvisClient.validator.TransactionFormValidator;
 
 @Controller
 public class TransactionController {
+	
+	public static final String LISTENER = "/app/chain/createTransaction";
 	
 	@Autowired 
 	private UserService userService;
@@ -59,7 +60,7 @@ public class TransactionController {
 		if (result.hasErrors()) {
 			return "redirect:transaction/add";
 		}
-		Sender sender = new Sender(transaction, UvisClientApplication.initNode.getUrl(), new BlockChainSessionHandler(), "/app/chain/createTransaction");
+		Sender sender = new Sender(transaction, BlockChain.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
 		sender.start();
 		return "redirect:transaction/list";
 	}

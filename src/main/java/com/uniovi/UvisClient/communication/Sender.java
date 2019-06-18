@@ -1,18 +1,21 @@
 package com.uniovi.UvisClient.communication;
 
-import java.util.concurrent.ExecutionException;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 
+import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.dto.AbstractDto;
 
 public class Sender extends Thread {
+	
+	private Logger logger = LogManager.getLogger(Sender.class);
 		
 	private AbstractDto dto;
-	private String url;
-	private StompSessionHandlerAdapter handler;
 	private String listener;
+
+	private Object url;
 	
 	public static StompSession session = null;
 
@@ -30,50 +33,38 @@ public class Sender extends Thread {
 	 */
 	public Sender(AbstractDto dto, String url, StompSessionHandlerAdapter handler, String listener) {
 		this.dto = dto;
-		this.url = url;
-		this.handler = handler;
 		this.listener = listener;
-		if (session==null) {
-			try {
-				session =Connection.initialize(url, handler);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		this.url = url;
+		initSession(url, handler);
+	}
+	
+	private void initSession(String url, StompSessionHandlerAdapter handler) {
+		if (session == null && (BlockChain.getInstance().getNodes()==null || session == null && BlockChain.getInstance().getNodes().size()>0)) { //First Connection 
+			session = Connection.initialize(url, handler);
 		}
 	}
 	
-	public Sender(Sender sender) {
-		this(sender.dto, sender.url, sender.handler, sender.listener);
-	}
-	
+	/**
+	 * Communicates with the blockchain node's by sending a dto.
+	 */
 	public void run() {
-//		StompSession session = null;
 		try {
-			synchronized (session) {
-				session.send(listener, dto);
+			if (session!=null ) {
+				synchronized (session) {
+					session.send(listener, dto);
+				}
 			}
-			
-//		} catch (InterruptedException e) {
-//			System.out.println("Por aquí");
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (ExecutionException e) {
-//			System.out.println("Por ahí");
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			System.out.println("============================Criminal, cri cri criminal================================");
-		} catch (Exception e) {
-			System.out.println("============================Salté================================");
-			if (session!=null) {
-				session.disconnect();
+		} catch (IllegalStateException e) { //The node is not listening anymore, gets the next node and retries.
+			logger.info("Connection with actual node lost: Searching a new node to communicate with");
+			session = null;
+			BlockChain.getInstance().getNextNode();
+			if (!this.url.equals(BlockChain.getInstance().getActualNode().getUrl())) {
+				Sender sender = new Sender(this.dto, BlockChain.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), this.listener);
+				logger.info(String.format("The new node's url is: %s", BlockChain.getInstance().getActualNode().getUrl()));
+				sender.start();
+			} else {
+				logger.error("Cannot find another node to connect with. Please contact with an administrator.");
 			}
-			Sender sender = new Sender(this);
-			sender.start();
 		}
 	}
 	
