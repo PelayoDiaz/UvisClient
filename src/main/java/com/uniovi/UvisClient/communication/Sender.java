@@ -39,7 +39,7 @@ public class Sender extends Thread {
 	}
 	
 	private void initSession(String url, StompSessionHandlerAdapter handler) {
-		if (session == null && (BlockChain.getInstance().getNodes()==null || session == null && BlockChain.getInstance().getNodes().size()>0)) { //First Connection 
+		if (session == null && (BlockChain.getInstance().getNodes()==null || BlockChain.getInstance().getNodes().size()>0)) { //First Connection 
 			session = Connection.initialize(url, handler);
 		}
 	}
