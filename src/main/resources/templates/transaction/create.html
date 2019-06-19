@@ -13,6 +13,7 @@
 					<option value="0" th:text="#{wallet.select}"></option>
 					<option th:each="wallet : ${walletsList}" th:value="${wallet.address}"
 						th:text="${wallet.name}"></option>
+					<span class="text-danger" th:if="${#fields.hasErrors('senderAddress')}" th:errors="*{senderAddress}">
 				</select>
 			</div>
 			
@@ -30,6 +31,7 @@
 				<div class="col-sm-4">
 					<input type="text" class="form-control" name="amount"
 						th:placeholder="#{amount.example}" required="true" />
+					<span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
 				</div>
 			</div>
 			

@@ -27,13 +27,32 @@ public class TransactionFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		TransactionDto transaction = (TransactionDto) target;
 		
-//		checkFunds(transaction);
+		checkSender(transaction, errors);
 		checkReceiver(transaction, errors);
+		checkFunds(transaction, errors);
+		
 	}
 	
 	/**
-	 * Checks if the receiver is valid. For a receiver to be valid, it has to exists 
-	 * its address in the blockchain and in the data base.
+	 * Checks if the sender is valid. For a receiver to be valid, it must have 
+	 * and address in the blockchain and in the data base.
+	 * 
+	 * @param transaction
+	 * 			The transaction to be checked.
+	 * @param errors
+	 * 			Errors
+	 */
+	private void checkSender(TransactionDto transaction, Errors errors) {
+		if (this.chainService.getWalletByAddress(transaction.senderAddress) == null) {
+			errors.rejectValue("senderAddress", "error.transaction.sender.no.exists");
+		} else if (this.walletService.getWalletByAddress(transaction.senderAddress) == null) {
+			errors.rejectValue("senderAddress", "error.transaction.sender.no.exists");
+		}
+	}
+	
+	/**
+	 * Checks if the receiver is valid. For a receiver to be valid, it must have 
+	 * and address in the blockchain and in the data base.
 	 * 
 	 * @param transaction
 	 * 			The transaction to be checked.
@@ -45,6 +64,22 @@ public class TransactionFormValidator implements Validator {
 			errors.rejectValue("receiver", "error.transaction.receiver.no.exists");
 		} else if (this.walletService.getWalletByAddress(transaction.receiver) == null) {
 			errors.rejectValue("receiver", "error.transaction.receiver.no.exists");
+		}
+	}
+	
+	/**
+	 * Checks if the sender has enough funds to be sent by creating the transaction.
+	 * 
+	 * @param transaction
+	 * 			The transaction to be checked.
+	 * @param errors
+	 * 			Errors.
+	 */
+	private void checkFunds(TransactionDto transaction, Errors errors) {
+		if (transaction.amount < 0.01) {
+			errors.reject("amount", "error.transaction.minimum.amount");
+		} else if (transaction.amount > this.chainService.getFundsByAddress(transaction.senderAddress)) {
+			errors.reject("amount", "error.transaction.sender.no.funds");
 		}
 	}
 

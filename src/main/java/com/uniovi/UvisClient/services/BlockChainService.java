@@ -40,5 +40,15 @@ public interface BlockChainService {
 	 * 			The found wallet
 	 */
 	public WalletDto getWalletByAddress(String address);
+	
+	/**
+	 * Returns the actual funds of a wallet given by address.
+	 * 
+	 * @param address
+	 * 			The address of the wallet to be checked.
+	 * @return Double
+	 * 			The funds available.
+	 */
+	public double getFundsByAddress(String address);
 
 }

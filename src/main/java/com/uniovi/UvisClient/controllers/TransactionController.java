@@ -47,7 +47,7 @@ public class TransactionController {
 	}
 	
 	@RequestMapping(value = "/transaction/add", method = RequestMethod.GET)
-	public String addTransactionView(Model model) {
+	public String addTransactionView(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
 		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
 		model.addAttribute("transaction", new TransactionDto());
 		model.addAttribute("walletsList", user.getWallets());

@@ -110,5 +110,23 @@ public class BlockChain {
 	public List<Node> getNodes() {
 		return (this.blockChainDto==null) ? null : new ArrayList<Node>(this.blockChainDto.nodes);
 	}
+	
+	/**
+	 * Returns the balance of an actual wallet given by address.
+	 * 
+	 * @param address
+	 * 			The address of the wallet to check the balance.
+	 * @return double
+	 * 			The total amount of money available
+	 */
+	public double getBalance(String address) {
+		List<TransactionDto> sentTransactions = this.getSentTransactionsByAddress(address);
+		List<TransactionDto> receivedTransactions = this.getReceivedTransactionsByAddress(address);
+		
+		Double sent = sentTransactions.stream().mapToDouble(x -> x.amount).sum();
+		Double received = receivedTransactions.stream().mapToDouble(x -> x.amount).sum();
+		
+		return received-sent;
+	}
 
 }
