@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniovi.UvisClient.entities.User;
-import com.uniovi.UvisClient.services.UserService;
+import com.uniovi.UvisClient.services.impl.UserServiceImpl;
 
 @Component
 public class SignUpFormValidator implements Validator {
 
 	@Autowired
-	private UserService usersService;
+	private UserServiceImpl usersService;
 	
 	@Override
 	public boolean supports(Class<?> aClass) {

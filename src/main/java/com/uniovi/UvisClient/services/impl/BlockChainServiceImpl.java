@@ -17,6 +17,13 @@ public class BlockChainServiceImpl implements BlockChainService {
 	public static final String SESSION_DTO = "sessionChain";
 
 	@Override
+	public List<TransactionDto> getPendingTransactions(User user) {
+		List<TransactionDto> pendingTransactions = new ArrayList<TransactionDto>();
+		user.getWallets().forEach(x -> pendingTransactions.addAll(BlockChain.getInstance().getPendingTransactionsByAddress(x.getAddress())));
+		return pendingTransactions;
+	}
+	
+	@Override
 	public List<TransactionDto> getSentTransactions(User user) {
 		List<TransactionDto> sentTransactions = new ArrayList<TransactionDto>();
 		user.getWallets().forEach(x -> sentTransactions.addAll(BlockChain.getInstance().getSentTransactionsByAddress(x.getAddress())));

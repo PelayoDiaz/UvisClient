@@ -14,8 +14,10 @@ public class BlockChain {
 	/** The unique Blockchain to be instantiated. */
 	private static BlockChain singleChain;
 	
+	/** The dto which contains all the information of the chain */
 	private BlockChainDto blockChainDto;
 	
+	/** The actual node the application communicates with. */ 
 	private Node actualNode;
 	
 	public static BlockChain getInstance() {
@@ -56,14 +58,49 @@ public class BlockChain {
 		return this.blockChainDto.nodes.size();
 	}
 	
+	/**
+	 * Returns the list of wallets contained into the chain.
+	 * 
+	 * @return List<WalletDto>
+	 * 			The list of wallets
+	 */
 	public List<WalletDto> getWalletsList() {
 		return new ArrayList<WalletDto>(this.blockChainDto.wallets);
 	}
 	
+	/**
+	 * Returns all the transactions pending to be processed.
+	 * 
+	 * @return List<TransactionDto>
+	 * 			The list of transactions.
+	 */
 	public List<TransactionDto> getTransactionsList() {
 		return new ArrayList<TransactionDto>(this.blockChainDto.transactions);
 	}
 	
+	/**
+	 * Returns all the transactions sent by a wallet pending to be processed.
+	 * 
+	 * @param address
+	 * 			The address of the wallet which sends the transactions.
+	 * 
+	 * @return List<TransactionDto>
+	 * 			The list of transactions.
+	 */
+	public List<TransactionDto> getPendingTransactionsByAddress(String address) {
+		List<TransactionDto> pendingTransactions = this.blockChainDto.transactions.stream()
+				.filter(x -> x.senderAddress.equals(address)).collect(Collectors.toList());
+		return pendingTransactions;
+	}
+	
+	/**
+	 * Returns all the processed transactions sent by a wallet.
+	 * 
+	 * @param address
+	 * 			The address of the wallet which sends the transactions.
+	 * @return List<TransactionDto>
+	 * 			The list of transactions
+	 */
 	public List<TransactionDto> getSentTransactionsByAddress(String address) {
 		List<TransactionDto> sentTransactions = new ArrayList<TransactionDto>();
 		this.blockChainDto.chain.forEach(x -> sentTransactions.addAll(x.transactions.stream()
@@ -71,6 +108,14 @@ public class BlockChain {
 		return sentTransactions;
 	}
 	
+	/**
+	 * Returns all the received transactions by a wallet.
+	 * 
+	 * @param address
+	 * 			The address of the wallet which recieves the transactions.
+	 * @return List<TransactionDto>
+	 * 			The list of transactions
+	 */
 	public List<TransactionDto> getReceivedTransactionsByAddress(String address) {
 		List<TransactionDto> sentTransactions = new ArrayList<TransactionDto>();
 		this.blockChainDto.chain.forEach(x -> sentTransactions.addAll(x.transactions.stream()
@@ -78,6 +123,14 @@ public class BlockChain {
 		return sentTransactions;
 	}
 	
+	/** 
+	 * Returns a wallet by its address or null iif it doesn't exist.
+	 * 
+	 * @param address
+	 * 			The address of the wallet to search.
+	 * @return WalletDto
+	 * 			The wallet. 
+	 */
 	public WalletDto getWallet(String address) {
 		return this.blockChainDto.wallets.stream()
 				.filter(x -> x.address.equals(address)).findFirst()
@@ -98,6 +151,13 @@ public class BlockChain {
 		this.actualNode = actualNode;
 	}
 
+	/**
+	 * Searches the next node which contains the blockchain to connect with. If there is
+	 * no more nodes available it returns the actual node.
+	 * 
+	 * @return Node
+	 * 			The next node in the net.
+	 */
 	public Node getNextNode() {
 		BlockChain.getInstance().blockChainDto.nodes.remove(actualNode);
 		Node nextNode = this.blockChainDto.nodes.stream()
@@ -107,6 +167,12 @@ public class BlockChain {
 		return nextNode;
 	}
 	
+	/**
+	 * Returns all the nodes connected to the chain.
+	 * 
+	 * @return List<Node>
+	 * 			All the nodes
+	 */
 	public List<Node> getNodes() {
 		return (this.blockChainDto==null) ? null : new ArrayList<Node>(this.blockChainDto.nodes);
 	}

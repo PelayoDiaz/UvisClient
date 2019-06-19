@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.UvisClient.entities.User;
+import com.uniovi.UvisClient.services.impl.UserServiceImpl;
 
 //@Service
 public class InsertSampleDataService {
 	
 	@Autowired
-	private UserService usersService;
+	private UserServiceImpl usersService;
 
 	@PostConstruct
 	public void init() {

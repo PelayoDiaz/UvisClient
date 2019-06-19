@@ -13,7 +13,7 @@ import com.uniovi.UvisClient.communication.Sender;
 import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.Wallet;
-import com.uniovi.UvisClient.services.UserService;
+import com.uniovi.UvisClient.services.impl.UserServiceImpl;
 import com.uniovi.UvisClient.services.impl.WalletServiceImpl;
 import com.uniovi.UvisClient.services.security.SecurityService;
 import com.uniovi.UvisClient.util.DtoConverter;
@@ -34,7 +34,7 @@ public class WalletController {
 	private WalletServiceImpl walletService;
 	
 	@Autowired 
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	@RequestMapping(value = "/wallet/add", method = RequestMethod.GET)
 	public String addWalletView(Model model) {

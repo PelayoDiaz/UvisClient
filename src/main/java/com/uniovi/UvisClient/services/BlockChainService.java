@@ -12,6 +12,16 @@ import com.uniovi.UvisClient.entities.dto.WalletDto;
 public interface BlockChainService {
 	
 	/**
+	 * Returns a list of transactions which are pending of being processed.
+	 *  
+	 * @param user
+	 * 			The user to search the transactions for.
+	 * @return List<TransactionDto>
+	 * 			The list of transactions.
+	 */
+	public List<TransactionDto> getPendingTransactions(User user);
+	
+	/**
 	 * Returns a list of the processed transactions sent by a user.
 	 * 
 	 * @param user

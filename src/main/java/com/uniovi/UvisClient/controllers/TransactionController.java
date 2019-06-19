@@ -14,7 +14,7 @@ import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.services.BlockChainService;
-import com.uniovi.UvisClient.services.UserService;
+import com.uniovi.UvisClient.services.impl.UserServiceImpl;
 import com.uniovi.UvisClient.services.security.SecurityService;
 import com.uniovi.UvisClient.validator.TransactionFormValidator;
 
@@ -24,7 +24,7 @@ public class TransactionController {
 	public static final String LISTENER = "/app/chain/createTransaction";
 	
 	@Autowired 
-	private UserService userService;
+	private UserServiceImpl userService;
 	
 	@Autowired 
 	private BlockChainService chainService;
@@ -39,7 +39,7 @@ public class TransactionController {
 	public String getTransactionsLists(Model model) {
 		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
 		
-		model.addAttribute("pendingTransactionsList", BlockChain.getInstance().getTransactionsList());
+		model.addAttribute("pendingTransactionsList", this.chainService.getPendingTransactions(user));
 		model.addAttribute("sentTransactionsList", this.chainService.getSentTransactions(user));
 		model.addAttribute("receivedTransactionsList", this.chainService.getReceivedTransactions(user) );
 		
