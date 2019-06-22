@@ -194,5 +194,15 @@ public class BlockChain {
 		
 		return received-sent;
 	}
+	
+	/**
+	 * Returns the actual number of blocks contained in the chain.
+	 * 
+	 * @return int
+	 * 			The number of blocks contained in the chain.
+	 */
+	public int getChainSize() {
+		return this.blockChainDto.chain.size();
+	}
 
 }

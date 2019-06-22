@@ -34,8 +34,8 @@
                   	<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
                   </div>
                   <div class="col-sm-6">
-                    <label class="control-label col-sm-12" th:text="#{password.repeat}" for="passwordRepeat">Password Repeat</label>
-                    <input type="password" class="form-control form-control-user" name="passwordRepeat" th:placeholder="#{password.repeat.placeholder}" required="true">
+                    <label class="control-label col-sm-12" th:text="#{password.repeat}" for="passwordConfirm">Password Repeat</label>
+                    <input type="password" class="form-control form-control-user" name="passwordConfirm" th:placeholder="#{password.repeat.placeholder}" required="true">
                   	<span class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">
                   </div>
                 </div>

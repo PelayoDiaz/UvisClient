@@ -60,5 +60,13 @@ public interface BlockChainService {
 	 * 			The funds available.
 	 */
 	public double getFundsByAddress(String address);
+	
+	/**
+	 * Returns the actual number of blocks contained in the chain.
+	 * 
+	 * @return int
+	 * 			The number of blocks contained in the chain.
+	 */
+	public int getNumberOfBlocks();
 
 }

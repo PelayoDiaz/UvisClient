@@ -46,5 +46,10 @@ public class BlockChainServiceImpl implements BlockChainService {
 	public double getFundsByAddress(String address) {
 		return BlockChain.getInstance().getBalance(address);
 	}
+
+	@Override
+	public int getNumberOfBlocks() {
+		return BlockChain.getInstance().getChainSize();
+	}
 	
 }
