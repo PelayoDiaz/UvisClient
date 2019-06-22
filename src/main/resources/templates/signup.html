@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="fragments/head" />
+
+<body class="bg-gradient-primary">
+
+  <div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+          <div class="col-lg-7">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h1 text-gray-900 mb-1" th:text="#{uvis}">Uvis</h1>
+                    <hr>
+                <h2 class="h4 text-gray-900 mb-4" th:text="#{signup}">Create an Account</h2>
+              </div>
+              <form class="user" method="post" action="/signup" th:object="${user}">
+
+                <div class="form-group">
+                  	<label class="control-label col-sm-12" th:text="#{username}" for="username">Username</label>
+                    <input type="text" class="form-control form-control-user" name="username" th:placeholder="#{username.placeholder}" required="true">
+                    <span class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+                </div>
+                
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <label class="control-label col-sm-12" th:text="#{password}" for="password">Password</label>
+                    <input type="password" class="form-control form-control-user" name="password" th:placeholder="#{password.placeholder}" required="true">
+                  	<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="control-label col-sm-12" th:text="#{password.repeat}" for="passwordRepeat">Password Repeat</label>
+                    <input type="password" class="form-control form-control-user" name="passwordRepeat" th:placeholder="#{password.repeat.placeholder}" required="true">
+                  	<span class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">
+                  </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                	<h2 class="h4 text-gray-900 mb-4" th:text="#{personal.information}">Personal information</h2>
+                </div>
+                
+                <div class="form-group">
+                  <label class="control-label col-sm-12" th:text="#{name}" for="name">Name:</label>
+                  <input type="text" class="form-control form-control-user" name="name" th:placeholder="#{name.placeholder}" required="true">
+                  <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                </div>
+                
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <label class="control-label col-sm-12" th:text="#{surname.first}" for="surname1">First Surname</label>
+                    <input type="text" class="form-control form-control-user" name="surname1" th:placeholder="#{surname.first.placeholder}" required="true">
+                  	<span class="text-danger" th:if="${#fields.hasErrors('surname1')}" th:errors="*{surname1}">
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="control-label col-sm-12" th:text="#{surname.second}" for="surname2">Second Surname</label>
+                    <input type="text" class="form-control form-control-user" name="surname2" th:placeholder="#{surname.second.placeholder}" required="true">
+                  	<span class="text-danger" th:if="${#fields.hasErrors('surname2')}" th:errors="*{surname2}">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+					<button type="submit" class="btn btn-primary btn-user btn-block" th:text="#{signup.menu}">Enviar</button>
+				</div>
+              </form>
+              <hr>
+              <div class="text-center">
+                  	<p>
+                  		<span th:text="#{language.message}" ></span>
+                  	</p>
+                  	<div class="row">
+                  		<div class="col-6">
+                  			<button id="btnEnglish" value="EN" class="btn btn-primary btn-user btn-block" th:text="#{language.en}"></button>
+                  		</div>
+                  		<div class="col-6">
+                  			<button id="btnSpanish" value="ES" class="btn btn-primary btn-user btn-block" th:text="#{language.es}"></button>
+                  		</div>
+                  	</div>
+              </div>
+              <div class="text-center">
+                <a class="small" href="/login" th:text="#{login.question}">Already have an account? Login!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

@@ -26,7 +26,7 @@
                   <form class="user" method="post" action="/login">
                     <div class="form-group">
                       <label class="control-label col-sm-12" for="username" th:text="#{username}"></label>
-                      <input type="email" class="form-control form-control-user" name="username"
+                      <input type="text" class="form-control form-control-user" name="username"
                       		aria-describedby="emailHelp" th:placeholder="#{username.placeholder}" required="true"/>
                     </div>
                     <div class="form-group">
@@ -41,7 +41,7 @@
                   <hr>
                   <div class="text-center">
                   	<h2 class="h4 text-gray-900 mb-4" th:text="#{account.question}">Account</h2>
-                    <a href="/signup" class="btn btn-primary btn-user btn-block" th:text="#{signup.menu}">
+                    	<a href="/signup" class="btn btn-primary btn-user btn-block" th:text="#{signup.menu}">
                     </a>
                   </div>
                   <hr>
