@@ -28,7 +28,7 @@ public class WalletFormValidator implements Validator {
 		Wallet wallet = (Wallet) target;
 		String loggedUsername = securityService.findLoggedInUsername();
 		
-		if (wallet.getName().length() < 5 || wallet.getName().length() > 25) {
+		if (wallet.getName().length() < 4 || wallet.getName().length() > 25) {
 			errors.rejectValue("name", "error.wallet.name.length");
 		}
 		
