@@ -1,4 +1,4 @@
-package com.uniovi.UvisClient.entities;
+package com.uniovi.UvisClient.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,10 @@ import com.uniovi.UvisClient.entities.dto.Node;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.entities.dto.WalletDto;
 
-public class BlockChain {
+public class BlockChainRepository {
 	
 	/** The unique Blockchain to be instantiated. */
-	private static BlockChain singleChain;
+	private static BlockChainRepository singleChain;
 	
 	/** The dto which contains all the information of the chain */
 	private BlockChainDto blockChainDto;
@@ -20,14 +20,14 @@ public class BlockChain {
 	/** The actual node the application communicates with. */ 
 	private Node actualNode;
 	
-	public static BlockChain getInstance() {
+	public static BlockChainRepository getInstance() {
 		if (singleChain == null) {
-			singleChain = new BlockChain();
+			singleChain = new BlockChainRepository();
 		}
 		return singleChain;
 	}
 	
-	private BlockChain() {}
+	private BlockChainRepository() {}
 	
 	/**
 	 * Updates the content of the chain.
@@ -159,7 +159,7 @@ public class BlockChain {
 	 * 			The next node in the net.
 	 */
 	public Node getNextNode() {
-		BlockChain.getInstance().blockChainDto.nodes.remove(actualNode);
+		BlockChainRepository.getInstance().blockChainDto.nodes.remove(actualNode);
 		Node nextNode = this.blockChainDto.nodes.stream()
 				.filter(x -> !x.getUrl().equals(actualNode.getUrl())).findFirst()
 				.orElse(actualNode);

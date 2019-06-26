@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
 import com.uniovi.UvisClient.communication.Sender;
-import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.Wallet;
+import com.uniovi.UvisClient.repositories.BlockChainRepository;
 import com.uniovi.UvisClient.repositories.WalletRepository;
 import com.uniovi.UvisClient.services.WalletService;
 import com.uniovi.UvisClient.util.CryptoUtil;
@@ -34,7 +34,7 @@ public class WalletServiceImpl implements WalletService {
 				wallet.getUser().getSurname1() + 
 				wallet.getUser().getSurname2());
 		wallet.setAddress(address);
-		Sender sender = new Sender(DtoConverter.toDto(wallet), BlockChain.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
+		Sender sender = new Sender(DtoConverter.toDto(wallet), BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
 		sender.start();
 		this.walletRepository.save(wallet);
 	}

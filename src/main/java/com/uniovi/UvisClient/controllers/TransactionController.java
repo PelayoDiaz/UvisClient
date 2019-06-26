@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
 import com.uniovi.UvisClient.communication.Sender;
-import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
+import com.uniovi.UvisClient.repositories.BlockChainRepository;
 import com.uniovi.UvisClient.services.BlockChainService;
 import com.uniovi.UvisClient.services.impl.UserServiceImpl;
 import com.uniovi.UvisClient.services.security.SecurityService;
@@ -60,7 +60,7 @@ public class TransactionController {
 		if (result.hasErrors()) {
 			return "redirect:transaction/add";
 		}
-		Sender sender = new Sender(transaction, BlockChain.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
+		Sender sender = new Sender(transaction, BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
 		sender.start();
 		return "redirect:transaction/list";
 	}

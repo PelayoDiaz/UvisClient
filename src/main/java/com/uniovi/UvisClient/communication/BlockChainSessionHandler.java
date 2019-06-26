@@ -7,8 +7,8 @@ import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 
-import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.dto.BlockChainDto;
+import com.uniovi.UvisClient.repositories.BlockChainRepository;
 
 import java.lang.reflect.Type;
 
@@ -42,7 +42,7 @@ public class BlockChainSessionHandler extends StompSessionHandlerAdapter {
     	super.handleFrame(headers, payload);
     	BlockChainDto chain = (BlockChainDto) payload;
     	if (chain != null) {
-    		BlockChain.getInstance().update(chain);
+    		BlockChainRepository.getInstance().update(chain);
     		logger.info("Chain obtained successfully. Ready to make operations!");
     	} else {
     		logger.info("Something went wrong while getting de chain.");

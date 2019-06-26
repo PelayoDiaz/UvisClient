@@ -59,7 +59,7 @@ public interface BlockChainService {
 	 * @return Double
 	 * 			The funds available.
 	 */
-	public double getFundsByAddress(String address);
+	public double getBalanceByAddress(String address);
 	
 	/**
 	 * Returns the actual number of blocks contained in the chain.

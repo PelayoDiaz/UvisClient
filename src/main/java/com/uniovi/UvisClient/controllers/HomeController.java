@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
 import com.uniovi.UvisClient.communication.Sender;
-import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.dto.BlockChainDto;
+import com.uniovi.UvisClient.repositories.BlockChainRepository;
 import com.uniovi.UvisClient.services.BlockChainService;
 
 @Controller
@@ -24,9 +24,9 @@ public class HomeController {
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
 		model.addAttribute("blockNumber", chainService.getNumberOfBlocks());
-		model.addAttribute("conectedNodes", BlockChain.getInstance().getConnectedNodes());
-		model.addAttribute("walletList", BlockChain.getInstance().getWalletsList());
-		model.addAttribute("transactionList", BlockChain.getInstance().getTransactionsList());
+		model.addAttribute("conectedNodes", BlockChainRepository.getInstance().getConnectedNodes());
+		model.addAttribute("walletList", BlockChainRepository.getInstance().getWalletsList());
+		model.addAttribute("transactionList", BlockChainRepository.getInstance().getTransactionsList());
 		return "home";
 	}
 	
@@ -37,7 +37,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public synchronized String login(Model model) {
-		Sender sender = new Sender(new BlockChainDto(), BlockChain.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
+		Sender sender = new Sender(new BlockChainDto(), BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
 		sender.start();
 		return "login";
 	}
