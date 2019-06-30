@@ -1,5 +1,8 @@
 package com.uniovi.UvisClient.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +45,13 @@ public class WalletServiceImpl implements WalletService {
 	@Override
 	public Wallet getWalletByAddress(String address) {
 		return this.walletRepository.findByAddress(address);
+	}
+	
+	@Override
+	public List<Wallet> findAllWallets() {
+		List<Wallet> wallets = new ArrayList<Wallet>();
+		this.walletRepository.findAll().forEach(wallets::add);
+		return wallets;
 	}
 
 }

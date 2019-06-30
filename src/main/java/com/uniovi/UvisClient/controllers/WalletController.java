@@ -50,11 +50,10 @@ public class WalletController {
 		return "redirect:wallet";
 	}
 	
-	@RequestMapping(value = "/wallet/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/wallet/directory", method = RequestMethod.GET)
 	public String getWalletsList(Model model) {
-		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
-		model.addAttribute("walletList", user.getWallets());
-		return "wallet/list";
+		model.addAttribute("walletList", this.walletService);
+		return "wallet/directory";
 	}
 	
 	/**
