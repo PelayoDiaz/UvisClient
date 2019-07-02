@@ -1,70 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head th:replace="fragments/head" />
-<body>
-	<!-- Barra de Navegación superior -->
-	<nav th:replace="fragments/nav" />
-	<div class="container">
-		<h2 th:text="#{transaction.management}"></h2>
-		<p th:text="#{transaction.description}"></p>
-		<div class="table-responsive">
-			<h3 th:text="#{transaction.pending}"></h3>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th th:text="#{transaction.sender}"></th>
-						<th th:text="#{transaction.receiver}"></th>
-						<th th:text="#{amount}"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="transaction : ${pendingTransactionsList}">
-						<td th:text="${transaction.senderAddress}"></td>
-						<td th:text="${transaction.receiver}"></td>
-						<td th:text="${transaction.amount}"></td>
-					</tr>
-				</tbody>
-			</table>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<!-- Sidebar -->
+		<ul th:replace="fragments/sidebar" />
+		<!-- End of Sidebar -->
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar -->
+				<nav th:replace="fragments/nav" />
+				<!-- End of Topbar -->
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<div class="text-center">
+						<h1 class="h2 mb-4 text-gray-800"
+							th:text="#{transaction.view.list}">My Transactions</h1>
+					</div>
+
+					<!-- Transaction Info -->
+					<div class="card shadow mb-4">
+						<!-- Card Header - Accordion -->
+						<a href="#collapseCardExample" class="d-block card-header py-3"
+							data-toggle="collapse" role="button" aria-expanded="true"
+							aria-controls="collapseCardExample">
+							<h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.list.card.title}">Creating Transaction</h6>
+						</a>
+						<!-- Card Content - Collapse -->
+						<div class="collapse show" id="collapseCardExample">
+							<div class="card-body"
+								th:text="#{transaction.list.card.description}"></div>
+						</div>
+					</div>
+					<!-- End of Transaction Info -->
+
+					<h2 class="h3 mb-4 text-gray-800"
+						th:text="#{transaction.pending}">Pending</h2>
+
+					<!-- Row: Pending -->
+					<div class="row">
+						<div class="col-lg-12">
+
+							<!-- Pending card -->
+							<div class="card shadow mb-4">
+								<!-- Card Header - Accordion -->
+								<a href="#collapseCardExample" class="d-block card-header py-3"
+									data-toggle="collapse" role="button" aria-expanded="true"
+									aria-controls="collapseCardExample">
+									<h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.card.pending}"></h6>
+								</a>
+								<!-- Card Content - Collapse -->
+								<div class="collapse show" id="collapseCardExample">
+									<div class="card-body">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th th:text="#{transaction.sender}"></th>
+													<th th:text="#{transaction.receiver}"></th>
+													<th th:text="#{amount}"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="transaction : ${pendingTransactionsList}">
+													<td th:text="${transaction.senderAddress}"></td>
+													<td th:text="${transaction.receiver}"></td>
+													<td th:text="${transaction.amount}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- End of Pending card -->
+							
+						</div>
+					</div>
+					<!-- End Of Row: Pending -->
+					
+					<h3 th:text="#{transaction.received}"></h3>
+					<!-- Row: Received -->
+					<div class="row">
+						<div class="col-lg-12">
+
+							<!-- Received card -->
+							<div class="card shadow mb-4">
+								<!-- Card Header - Accordion -->
+								<a href="#collapseCardExample" class="d-block card-header py-3"
+									data-toggle="collapse" role="button" aria-expanded="true"
+									aria-controls="collapseCardExample">
+									<h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.card.received}"></h6>
+								</a>
+								<!-- Card Content - Collapse -->
+								<div class="collapse show" id="collapseCardExample">
+									<div class="card-body">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th th:text="#{transaction.sender}"></th>
+													<th th:text="#{transaction.receiver}"></th>
+													<th th:text="#{amount}"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="transaction : ${receivedTransactionsList}">
+													<td th:text="${transaction.senderAddress}"></td>
+													<td th:text="${transaction.receiver}"></td>
+													<td th:text="${transaction.amount}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- End of Received card -->
+							
+						</div>
+					</div>
+					<!-- End Of Row: Received -->
+					
+					<h3 th:text="#{transaction.sent}"></h3>
+					<!-- Row: Received -->
+					<div class="row">
+						<div class="col-lg-12">
+
+							<!-- Received card -->
+							<div class="card shadow mb-4">
+								<!-- Card Header - Accordion -->
+								<a href="#collapseCardExample" class="d-block card-header py-3"
+									data-toggle="collapse" role="button" aria-expanded="true"
+									aria-controls="collapseCardExample">
+									<h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.card.sent}"></h6>
+								</a>
+								<!-- Card Content - Collapse -->
+								<div class="collapse show" id="collapseCardExample">
+									<div class="card-body">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th th:text="#{transaction.sender}"></th>
+													<th th:text="#{transaction.receiver}"></th>
+													<th th:text="#{amount}"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="transaction : ${sentTransactionsList}">
+													<td th:text="${transaction.senderAddress}"></td>
+													<td th:text="${transaction.receiver}"></td>
+													<td th:text="${transaction.amount}"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- End of Received card -->
+							
+						</div>
+					</div>
+					<!-- End Of Row: Received -->
+
+					<!-- /.container-fluid -->
+				</div>
+			</div>
+			<!-- End of Main Content -->
+
+			<!-- Footer -->
+			<footer th:replace="fragments/footer" />
+			<!-- End of Footer -->
+
 		</div>
-		<div class="table-responsive">
-			<h3 th:text="#{transaction.sent}"></h3>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th th:text="#{transaction.sender}"></th>
-						<th th:text="#{transaction.receiver}"></th>
-						<th th:text="#{amount}"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="transaction : ${sentTransactionsList}">
-						<td th:text="${transaction.senderAddress}"></td>
-						<td th:text="${transaction.receiver}"></td>
-						<td th:text="${transaction.amount}"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="table-responsive">
-			<h3 th:text="#{transaction.received}"></h3>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th th:text="#{transaction.sender}"></th>
-						<th th:text="#{transaction.receiver}"></th>
-						<th th:text="#{amount}"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="transaction : ${receivedTransactionsList}">
-						<td th:text="${transaction.senderAddress}"></td>
-						<td th:text="${transaction.receiver}"></td>
-						<td th:text="${transaction.amount}"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<!-- End of Content Wrapper -->
+
 	</div>
-	<footer th:replace="fragments/footer" />
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="/vendor/jquery/jquery.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="/vendor/chart.js/Chart.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="/js/demo/chart-pie-demo.js"></script>
+
 </body>
+
 </html>

@@ -52,7 +52,7 @@ public class WalletController {
 	
 	@RequestMapping(value = "/wallet/directory", method = RequestMethod.GET)
 	public String getWalletsList(Model model) {
-		model.addAttribute("walletList", this.walletService);
+		model.addAttribute("walletList", this.walletService.findAllWallets());
 		return "wallet/directory";
 	}
 	

@@ -1,47 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head th:replace="fragments/head" />
-<body>
-<!-- Barra de Navegación superior -->
-	<nav th:replace="fragments/nav" />
-	<div class="container">
-		<form class="form-horizontal" method="post" action="/transaction" th:object="${transaction}">
-			<h2 th:text="#{wallet.create.title}"></h2>
-			<div class="form-group blu-margin">
-				<h3 th:text="#{wallet.select}"></h3>
-				<select class="form-control" id="wallets" name="senderAddress">
-					<option value="0" th:text="#{wallet.select}"></option>
-					<option th:each="wallet : ${walletsList}" th:value="${wallet.address}"
-						th:text="${wallet.name}"></option>
-					<span class="text-danger" th:if="${#fields.hasErrors('senderAddress')}" th:errors="*{senderAddress}">
-				</select>
-			</div>
-			
-			<div class="form-group blu-margin">
-				<h3 th:text="#{transaction.create}"></h3>
-				<label class="control-label col-sm-2" for="receiver" th:text="#{transaction.receiver.address}"></label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="receiver"
-						th:placeholder="#{address}" required="true" />
-					<span class="text-danger" th:if="${#fields.hasErrors('receiver')}" th:errors="*{receiver}">
-				</div>
-			</div>
-			<div class="form-group blu-margin">	
-				<label class="control-label col-sm-2" for="amount" th:text="#{amount}"></label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" name="amount"
-						th:placeholder="#{amount.example}" required="true" />
-					<span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary" th:text="#{send}"></button>
-				</div>
-			</div>
-		</form>
-	</div>
-	<footer th:replace="fragments/footer" />
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+	<!-- Sidebar -->
+    <ul th:replace="fragments/sidebar" />
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+       <!-- Topbar -->
+       <nav th:replace="fragments/nav" />
+       <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="text-center">
+          	<h1 class="h2 mb-4 text-gray-800" th:text="#{transaction.create}">Create Transaction</h1>
+          </div>
+          
+          <!-- Wallet Info -->
+          <div class="card shadow mb-4">
+             <!-- Card Header - Accordion -->
+             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                <h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.create.card.title}">Creating Transaction</h6>
+             </a>
+             <!-- Card Content - Collapse -->
+            <div class="collapse show" id="collapseCardExample">
+               <div class="card-body" th:text="#{transaction.create.card.description}">
+                    
+              </div>
+            </div>
+          </div>
+          <!-- End of Wallet Info -->
+          
+          <h2 class="h3 mb-4 text-gray-800" th:text="#{transaction.fill.form}">Create Transaction</h2>
+          
+          <div class="row">
+          <div class="col-lg-12">
+          
+          <!-- Create a Wallet card -->                
+          <div class="card shadow mb-4">
+             <!-- Card Header - Accordion -->
+             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                <h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.create.card.form}">Creating Transaction</h6>
+             </a>
+             <!-- Card Content - Collapse -->
+            <div class="collapse show" id="collapseCardExample">
+               <div class="card-body">
+               		<form class="form-horizontal" method="post" action="/transaction" th:object="${transaction}">
+						
+						<div class="form-group blu-margin">
+							<h3 th:text="#{wallet.select}"></h3>
+							<select class="form-control" id="wallets" name="senderAddress">
+								<option value="0" th:text="#{wallet.select}"></option>
+								<option th:each="wallet : ${walletsList}" th:value="${wallet.address}"
+									th:text="${wallet.name}"></option>
+								<span class="text-danger" th:if="${#fields.hasErrors('senderAddress')}" th:errors="*{senderAddress}">
+							</select>
+						</div>
+						
+						<div class="form-group blu-margin">
+							<h3 th:text="#{transaction.create}"></h3>
+							<label class="control-label col-sm-2" for="receiver" th:text="#{transaction.receiver.address}"></label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="receiver"
+									th:placeholder="#{address}" required="true" />
+								<span class="text-danger" th:if="${#fields.hasErrors('receiver')}" th:errors="*{receiver}">
+							</div>
+						</div>
+						<div class="form-group blu-margin">	
+							<label class="control-label col-sm-2" for="amount" th:text="#{amount}"></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" name="amount"
+									th:placeholder="#{amount.example}" required="true" />
+								<span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-primary" th:text="#{send}"></button>
+							</div>
+						</div>
+					</form>
+              </div>
+            </div>
+          </div>
+          </div>
+          <!-- End of Create a Wallet card --> 
+          </div>
+        <!-- /.container-fluid -->
+		</div>
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer th:replace="fragments/footer" />
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin-2.min.js"></script>
+  
+  <!-- Page level plugins -->
+  <script src="/vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="/js/demo/chart-pie-demo.js"></script>
+
 </body>
+
 </html>
