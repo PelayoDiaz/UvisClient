@@ -1,5 +1,7 @@
 package com.uniovi.UvisClient.services;
 
+import java.util.List;
+
 import com.uniovi.UvisClient.entities.Wallet;
 
 public interface WalletService {
@@ -35,4 +37,12 @@ public interface WalletService {
 	 * 			The found wallet
 	 */
 	public Wallet getWalletByAddress(String address);
+	
+	/**
+	 * Returns all the wallets contained in the data base
+	 * @return List<Wallet>
+	 * 			All the wallets contained in the list.
+	 * 		
+	 */
+	public List<Wallet> findAllWallets();
 }

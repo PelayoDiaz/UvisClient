@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<form class="form-horizontal" method="post" action="/transaction" th:object="${transaction}">
+			<h2 th:text="#{wallet.create.title}"></h2>
+			<div class="form-group blu-margin">
+				<h3 th:text="#{wallet.select}"></h3>
+				<select class="form-control" id="wallets" name="senderAddress">
+					<option value="0" th:text="#{wallet.select}"></option>
+					<option th:each="wallet : ${walletsList}" th:value="${wallet.address}"
+						th:text="${wallet.name}"></option>
+					<span class="text-danger" th:if="${#fields.hasErrors('senderAddress')}" th:errors="*{senderAddress}">
+				</select>
+			</div>
+			
+			<div class="form-group blu-margin">
+				<h3 th:text="#{transaction.create}"></h3>
+				<label class="control-label col-sm-2" for="receiver" th:text="#{transaction.receiver.address}"></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="receiver"
+						th:placeholder="#{address}" required="true" />
+					<span class="text-danger" th:if="${#fields.hasErrors('receiver')}" th:errors="*{receiver}">
+				</div>
+			</div>
+			<div class="form-group blu-margin">	
+				<label class="control-label col-sm-2" for="amount" th:text="#{amount}"></label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" name="amount"
+						th:placeholder="#{amount.example}" required="true" />
+					<span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary" th:text="#{send}"></button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

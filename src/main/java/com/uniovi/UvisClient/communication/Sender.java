@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 
-import com.uniovi.UvisClient.entities.BlockChain;
 import com.uniovi.UvisClient.entities.dto.AbstractDto;
+import com.uniovi.UvisClient.repositories.BlockChainRepository;
 
 public class Sender extends Thread {
 	
@@ -39,7 +39,7 @@ public class Sender extends Thread {
 	}
 	
 	private void initSession(String url, StompSessionHandlerAdapter handler) {
-		if (session == null && (BlockChain.getInstance().getNodes()==null || BlockChain.getInstance().getNodes().size()>0)) { //First Connection 
+		if (session == null && (BlockChainRepository.getInstance().getNodes()==null || BlockChainRepository.getInstance().getNodes().size()>0)) { //First Connection 
 			session = Connection.initialize(url, handler);
 		}
 	}
@@ -57,10 +57,10 @@ public class Sender extends Thread {
 		} catch (IllegalStateException e) { //The node is not listening anymore, gets the next node and retries.
 			logger.info("Connection with actual node lost: Searching a new node to communicate with");
 			session = null;
-			BlockChain.getInstance().getNextNode();
-			if (!this.url.equals(BlockChain.getInstance().getActualNode().getUrl())) {
-				Sender sender = new Sender(this.dto, BlockChain.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), this.listener);
-				logger.info(String.format("The new node's url is: %s", BlockChain.getInstance().getActualNode().getUrl()));
+			BlockChainRepository.getInstance().getNextNode();
+			if (!this.url.equals(BlockChainRepository.getInstance().getActualNode().getUrl())) {
+				Sender sender = new Sender(this.dto, BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), this.listener);
+				logger.info(String.format("The new node's url is: %s", BlockChainRepository.getInstance().getActualNode().getUrl()));
 				sender.start();
 			} else {
 				logger.error("Cannot find another node to connect with. Please contact with an administrator.");

@@ -1,0 +1,75 @@
+<!-- nav.html -->
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<img src="/img/student-48.png" alt="logo" />
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
+				<li ><a href="/home" th:text="#{home}"></a></li>
+				<li id="wallets-menu" class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<span th:text="#{wallet.management}"></span> 
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/wallet/list" th:text="#{wallet.view.list}"></a></li>
+						<li><a href="/wallet/add" th:text="#{wallet.add}"></a></li>
+					</ul></li>
+				<li id="transactionsMenu" class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<span th:text="#{transaction.management}"></span> 
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/transaction/list" th:text="#{transaction.view.list}"></a></li>
+						<li><a href="/transaction/add" th:text="#{transaction.add}"></a></li>						
+					</ul></li>
+				<li><a href="/user/list" th:text="#{user.view.list}"></a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a id="btnLanguage" href=" #"
+						class="dropdown-toggle" data-toggle="dropdown" role="button"
+						aria-haspopup="true" aria-expanded="false">
+							<span class="glyphicon glyphicon-globe" ></span>
+							<span th:text="#{language.change}"></span> 
+							<span class="caret"></span>
+					</a>
+					<ul id="languageDropdownMenuButton" class="dropdown-menu">
+						<li><a id="btnEnglish" value="EN"> <img
+								th:src="@{/img/if_uk_flag.png}"
+								style="border: 0; float: left; margin-right: 15px" /> <span
+								th:text="#{language.en}"></span>
+						</a></li>
+						<li><a id="btnSpanish" value="ES"> <img
+								th:src="@{/img/if_spain_flag.png}"
+								style="border: 0; float: left; margin-right: 15px" /> <span
+								th:text="#{language.es}"></span>
+						</a></li>
+					</ul>
+				</li>
+				<li sec:authorize="!isAuthenticated()">
+				<a href="/signup"> 
+					<span class="glyphicon glyphicon-user"></span>
+					<span th:text="#{signup.menu}" ></span>
+				</a></li>
+				<li sec:authorize="!isAuthenticated()">
+				<a href="/login" >
+						<span class="glyphicon glyphicon-log-in" ></span>
+						<span th:text="#{login.menu}" ></span>
+				</a></li>
+				<li sec:authorize="isAuthenticated()"> 
+				<a href="/logout" > 
+					<span class="glyphicon glyphicon-log-out"></span>
+					<span th:text="#{logOut.menu}" ></span>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>

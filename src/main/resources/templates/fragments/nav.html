@@ -1,75 +1,224 @@
-<!-- nav.html -->
-<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#myNavbar">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<img src="/img/student-48.png" alt="logo" />
+
+<!-- Topbar -->
+<nav
+	class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+	<!-- Sidebar Toggle (Topbar) -->
+	<button id="sidebarToggleTop"
+		class="btn btn-link d-md-none rounded-circle mr-3">
+		<i class="fa fa-bars"></i>
+	</button>
+
+	<!-- Topbar Search -->
+	<form
+		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+		<div class="input-group">
+			<input type="text" class="form-control bg-light border-0 small"
+				placeholder="Search for..." aria-label="Search"
+				aria-describedby="basic-addon2">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="button">
+					<i class="fas fa-search fa-sm"></i>
+				</button>
+			</div>
 		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
-				<li ><a href="/home" th:text="#{home}"></a></li>
-				<li id="wallets-menu" class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<span th:text="#{wallet.management}"></span> 
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="/wallet/list" th:text="#{wallet.view.list}"></a></li>
-						<li><a href="/wallet/add" th:text="#{wallet.add}"></a></li>
-					</ul></li>
-				<li id="transactionsMenu" class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<span th:text="#{transaction.management}"></span> 
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="/transaction/list" th:text="#{transaction.view.list}"></a></li>
-						<li><a href="/transaction/add" th:text="#{transaction.add}"></a></li>						
-					</ul></li>
-				<li><a href="/user/list" th:text="#{user.view.list}"></a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a id="btnLanguage" href=" #"
-						class="dropdown-toggle" data-toggle="dropdown" role="button"
-						aria-haspopup="true" aria-expanded="false">
-							<span class="glyphicon glyphicon-globe" ></span>
-							<span th:text="#{language.change}"></span> 
-							<span class="caret"></span>
-					</a>
-					<ul id="languageDropdownMenuButton" class="dropdown-menu">
-						<li><a id="btnEnglish" value="EN"> <img
-								th:src="@{/img/if_uk_flag.png}"
-								style="border: 0; float: left; margin-right: 15px" /> <span
-								th:text="#{language.en}"></span>
-						</a></li>
-						<li><a id="btnSpanish" value="ES"> <img
-								th:src="@{/img/if_spain_flag.png}"
-								style="border: 0; float: left; margin-right: 15px" /> <span
-								th:text="#{language.es}"></span>
-						</a></li>
-					</ul>
-				</li>
-				<li sec:authorize="!isAuthenticated()">
-				<a href="/signup"> 
-					<span class="glyphicon glyphicon-user"></span>
-					<span th:text="#{signup.menu}" ></span>
-				</a></li>
-				<li sec:authorize="!isAuthenticated()">
-				<a href="/login" >
-						<span class="glyphicon glyphicon-log-in" ></span>
-						<span th:text="#{login.menu}" ></span>
-				</a></li>
-				<li sec:authorize="isAuthenticated()"> 
-				<a href="/logout" > 
-					<span class="glyphicon glyphicon-log-out"></span>
+	</form>
+
+	<!-- Topbar Navbar -->
+	<ul class="navbar-nav ml-auto">
+
+		<!-- Nav Item - Search Dropdown (Visible Only XS) -->
+		<li class="nav-item dropdown no-arrow d-sm-none"><a
+			class="nav-link dropdown-toggle" href="#" id="searchDropdown"
+			role="button" data-toggle="dropdown" aria-haspopup="true"
+			aria-expanded="false"> <i class="fas fa-search fa-fw"></i>
+		</a> <!-- Dropdown - Messages -->
+			<div
+				class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+				aria-labelledby="searchDropdown">
+				<form class="form-inline mr-auto w-100 navbar-search">
+					<div class="input-group">
+						<input type="text" class="form-control bg-light border-0 small"
+							placeholder="Search for..." aria-label="Search"
+							aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="button">
+								<i class="fas fa-search fa-sm"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div></li>
+
+		<!-- Nav Item - Alerts -->
+		<li class="nav-item dropdown no-arrow mx-1"><a
+			class="nav-link dropdown-toggle" href="#" id="alertsDropdown"
+			role="button" data-toggle="dropdown" aria-haspopup="true"
+			aria-expanded="false"> <i class="fas fa-bell fa-fw"></i> <!-- Counter - Alerts -->
+				<span class="badge badge-danger badge-counter">3+</span>
+		</a> <!-- Dropdown - Alerts -->
+			<div
+				class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+				aria-labelledby="alertsDropdown">
+				<h6 class="dropdown-header">Alerts Center</h6>
+				<a class="dropdown-item d-flex align-items-center" href="#">
+					<div class="mr-3">
+						<div class="icon-circle bg-primary">
+							<i class="fas fa-file-alt text-white"></i>
+						</div>
+					</div>
+					<div>
+						<div class="small text-gray-500">December 12, 2019</div>
+						<span class="font-weight-bold">A new monthly report is
+							ready to download!</span>
+					</div>
+				</a> <a class="dropdown-item d-flex align-items-center" href="#">
+					<div class="mr-3">
+						<div class="icon-circle bg-success">
+							<i class="fas fa-donate text-white"></i>
+						</div>
+					</div>
+					<div>
+						<div class="small text-gray-500">December 7, 2019</div>
+						$290.29 has been deposited into your account!
+					</div>
+				</a> <a class="dropdown-item d-flex align-items-center" href="#">
+					<div class="mr-3">
+						<div class="icon-circle bg-warning">
+							<i class="fas fa-exclamation-triangle text-white"></i>
+						</div>
+					</div>
+					<div>
+						<div class="small text-gray-500">December 2, 2019</div>
+						Spending Alert: We've noticed unusually high spending for your
+						account.
+					</div>
+				</a> <a class="dropdown-item text-center small text-gray-500" href="#">Show
+					All Alerts</a>
+			</div></li>
+
+		<!-- Nav Item - Messages -->
+		<li class="nav-item dropdown no-arrow mx-1"><a
+			class="nav-link dropdown-toggle" href="#" id="messagesDropdown"
+			role="button" data-toggle="dropdown" aria-haspopup="true"
+			aria-expanded="false"> <i class="fas fa-envelope fa-fw"></i> <!-- Counter - Messages -->
+				<span class="badge badge-danger badge-counter">7</span>
+		</a> <!-- Dropdown - Messages -->
+			<div
+				class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+				aria-labelledby="messagesDropdown">
+				<h6 class="dropdown-header">Message Center</h6>
+				<a class="dropdown-item d-flex align-items-center" href="#">
+					<div class="dropdown-list-image mr-3">
+						<img class="rounded-circle"
+							src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+						<div class="status-indicator bg-success"></div>
+					</div>
+					<div class="font-weight-bold">
+						<div class="text-truncate">Hi there! I am wondering if you
+							can help me with a problem I've been having.</div>
+						<div class="small text-gray-500">Emily Fowler · 58m</div>
+					</div>
+				</a> <a class="dropdown-item d-flex align-items-center" href="#">
+					<div class="dropdown-list-image mr-3">
+						<img class="rounded-circle"
+							src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
+						<div class="status-indicator"></div>
+					</div>
+					<div>
+						<div class="text-truncate">I have the photos that you
+							ordered last month, how would you like them sent to you?</div>
+						<div class="small text-gray-500">Jae Chun · 1d</div>
+					</div>
+				</a> <a class="dropdown-item d-flex align-items-center" href="#">
+					<div class="dropdown-list-image mr-3">
+						<img class="rounded-circle"
+							src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
+						<div class="status-indicator bg-warning"></div>
+					</div>
+					<div>
+						<div class="text-truncate">Last month's report looks great,
+							I am very happy with the progress so far, keep up the good work!</div>
+						<div class="small text-gray-500">Morgan Alvarez · 2d</div>
+					</div>
+				</a> <a class="dropdown-item d-flex align-items-center" href="#">
+					<div class="dropdown-list-image mr-3">
+						<img class="rounded-circle"
+							src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
+						<div class="status-indicator bg-success"></div>
+					</div>
+					<div>
+						<div class="text-truncate">Am I a good boy? The reason I ask
+							is because someone told me that people say this to all dogs, even
+							if they aren't good...</div>
+						<div class="small text-gray-500">Chicken the Dog · 2w</div>
+					</div>
+				</a> <a class="dropdown-item text-center small text-gray-500" href="#">Read
+					More Messages</a>
+			</div></li>
+			
+		<!-- Lenguaje -->
+		<li class="nav-item dropdown no-arrow mx-1"><a
+			class="nav-link dropdown-toggle" href="#" id="languaje"
+			role="button" data-toggle="dropdown" aria-haspopup="true"
+			aria-expanded="false"> <i class="fas fa-globe-americas"></i></a>
+			<div
+				class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+				aria-labelledby="messagesDropdown">
+				<h6 class="dropdown-header" th:text="#{language}">Idiomas</h6>
+				
+				<a id="btnSpanish" value="ES" class="dropdown-item d-flex align-items-center" href="#">
+					<div class="dropdown-list-image mr-3">
+						<img class="rounded-circle" th:src="@{/img/if_spain_flag.png}">
+					</div>
+					<div>
+						<div class="text-truncate" th:text="#{language.es}"></div>
+					</div>
+				</a>
+				
+				<a id="btnEnglish" value="EN" class="dropdown-item d-flex align-items-center" href="#">
+					<div class="dropdown-list-image mr-3">
+						<img class="rounded-circle" th:src="@{/img/if_uk_flag.png}">
+					</div>
+					<div>
+						<div class="text-truncate" th:text="#{language.en}"></div>
+					</div>
+				</a>
+			</div>
+		</li>
+		<!-- End of Lenguaje -->
+
+		<div class="topbar-divider d-none d-sm-block"></div>
+
+		<!-- Nav Item - User Information -->
+		<li class="nav-item dropdown no-arrow"><a
+			class="nav-link dropdown-toggle" href="#" id="userDropdown"
+			role="button" data-toggle="dropdown" aria-haspopup="true"
+			aria-expanded="false"> <span
+				class="mr-2 d-none d-lg-inline text-gray-600 small">
+				[[${#httpServletRequest.remoteUser}]]</span> 
+				<img class="img-profile rounded-circle"
+					th:src="@{/img/login_doggy_2.jpg}">
+		</a> <!-- Dropdown - User Information -->
+			<div
+				class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+				aria-labelledby="userDropdown">
+				<a class="dropdown-item" href="#"> <i
+					class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+				</a> <a class="dropdown-item" href="#"> <i
+					class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
+				</a> <a class="dropdown-item" href="#"> <i
+					class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity
+					Log
+				</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="/logout"> <i
+					class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 					<span th:text="#{logOut.menu}" ></span>
-				</a></li>
-			</ul>
-		</div>
-	</div>
+				</a>
+			</div>
+		</li>
+	</ul>
+
 </nav>
+<!-- End of Topbar -->
