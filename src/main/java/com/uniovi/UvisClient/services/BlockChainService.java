@@ -68,5 +68,20 @@ public interface BlockChainService {
 	 * 			The number of blocks contained in the chain.
 	 */
 	public int getNumberOfBlocks();
+	
+	/**
+	 * Returns all the transactions contained into the chain which are pending
+	 * of being processed and included in a block.
+	 * @return List<TransactionDto>
+	 * 			The list of pending transactions
+	 */
+	public List<TransactionDto> getPendingTransactions();
+	
+	/**
+	 * Returns the total of processed transactions in the chain.
+	 * @return Integer
+	 * 			The number of total transactions contained in all the blocks of the chain.
+	 */
+	public int getTotalOfProcessedTransactions();
 
 }

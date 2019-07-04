@@ -74,7 +74,7 @@ public class BlockChainRepository {
 	 * @return List<TransactionDto>
 	 * 			The list of transactions.
 	 */
-	public List<TransactionDto> getTransactionsList() {
+	public List<TransactionDto> getPendingTransactionsList() {
 		return new ArrayList<TransactionDto>(this.blockChainDto.transactions);
 	}
 	

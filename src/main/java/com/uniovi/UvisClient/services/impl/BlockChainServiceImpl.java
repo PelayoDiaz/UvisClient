@@ -50,4 +50,14 @@ public class BlockChainServiceImpl implements BlockChainService {
 		return BlockChainRepository.getInstance().getChainSize();
 	}
 	
+	@Override
+	public List<TransactionDto> getPendingTransactions() {
+		return BlockChainRepository.getInstance().getPendingTransactionsList();
+	}
+	
+	@Override
+	public int getTotalOfProcessedTransactions() {
+		return -1;
+	}
+	
 }

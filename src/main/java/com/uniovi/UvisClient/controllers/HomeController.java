@@ -23,10 +23,12 @@ public class HomeController {
 	
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
-		model.addAttribute("blockNumber", chainService.getNumberOfBlocks());
 		model.addAttribute("conectedNodes", BlockChainRepository.getInstance().getConnectedNodes());
-		model.addAttribute("walletList", BlockChainRepository.getInstance().getWalletsList());
-		model.addAttribute("transactionList", BlockChainRepository.getInstance().getTransactionsList());
+		model.addAttribute("blockNumber", this.chainService.getNumberOfBlocks());
+		model.addAttribute("processedTransactions", this.chainService.getTotalOfProcessedTransactions());
+		model.addAttribute("pendingTransactions", this.chainService.getPendingTransactions().size());
+		
+		model.addAttribute("transactionList", this.chainService.getPendingTransactions());
 		return "home";
 	}
 	
