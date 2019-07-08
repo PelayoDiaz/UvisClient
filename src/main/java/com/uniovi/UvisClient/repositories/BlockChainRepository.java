@@ -205,4 +205,14 @@ public class BlockChainRepository {
 		return this.blockChainDto.chain.size();
 	}
 
+	/**
+	 * Returns the total amount of transactions in the chain.
+	 * 
+	 * @return int
+	 * 			The number of processed transactions contained in the chain
+	 */
+	public int getTotalOfProcessedTransactions() {
+		return this.blockChainDto.chain.stream().mapToInt(x -> x.transactions.size()).sum();
+	}
+
 }

@@ -2,10 +2,7 @@ package com.uniovi.UvisClient.services;
 
 import java.util.List;
 
-import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
-
 import com.uniovi.UvisClient.entities.User;
-import com.uniovi.UvisClient.entities.dto.AbstractDto;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.entities.dto.WalletDto;
 

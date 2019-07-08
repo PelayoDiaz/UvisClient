@@ -57,7 +57,7 @@ public class BlockChainServiceImpl implements BlockChainService {
 	
 	@Override
 	public int getTotalOfProcessedTransactions() {
-		return -1;
+		return BlockChainRepository.getInstance().getTotalOfProcessedTransactions();
 	}
 	
 }

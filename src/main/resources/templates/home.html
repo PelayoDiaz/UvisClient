@@ -83,7 +83,7 @@
                       	<span th:text="#{transaction.processed.message}" ></span>
                       </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      	<span th:text="${blockNumber}"></b>
+                      	<span th:text="${processedTransactions}"></b>
                       </div>
                     </div>
                     <div class="col-auto">
@@ -104,7 +104,7 @@
                       	<span th:text="#{transaction.pending.message}" ></span>
                       </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
-                      	<span th:text="${blockNumber}"></b>
+                      	<span th:text="${pendingTransactions}"></b>
                       </div>
                     </div>
                     <div class="col-auto">
