@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 	$("#languageDropdownMenuButton a").click(function(e) {
 		e.preventDefault(); // cancel the link behaviour

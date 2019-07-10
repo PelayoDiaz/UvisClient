@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Wallet {
@@ -22,6 +23,11 @@ public class Wallet {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@Transient
+	/** The funds of the wallet. It is used only to 
+	 * be read and set with the value calculated in the chain.*/
+	private double funds;
 	
 	public Wallet() {}
 
@@ -79,6 +85,20 @@ public class Wallet {
 	 */
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	/**
+	 * @return the funds
+	 */
+	public double getFunds() {
+		return funds;
+	}
+
+	/**
+	 * @param funds the funds to set
+	 */
+	public void setFunds(double funds) {
+		this.funds = funds;
 	}
 	
 	

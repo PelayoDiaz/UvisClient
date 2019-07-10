@@ -32,11 +32,11 @@
           <!-- Wallet Info -->
           <div class="card shadow mb-4">
              <!-- Card Header - Accordion -->
-             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+             <a href="#collapseDescription" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDescription">
                 <h6 class="m-0 font-weight-bold text-primary" th:text="#{wallet.create.card.title}">Creating Wallet</h6>
              </a>
              <!-- Card Content - Collapse -->
-            <div class="collapse show" id="collapseCardExample">
+            <div class="collapse show" id="collapseDescription">
                <div class="card-body" th:text="#{wallet.create.card.description}">
                     
               </div>
@@ -52,11 +52,11 @@
           <!-- Create a Wallet card -->                
           <div class="card shadow mb-4">
              <!-- Card Header - Accordion -->
-             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+             <a href="#collapseCreate" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCreate">
                 <h6 class="m-0 font-weight-bold text-primary" th:text="#{wallet.create.card.form}">Creating Wallet</h6>
              </a>
              <!-- Card Content - Collapse -->
-            <div class="collapse show" id="collapseCardExample">
+            <div class="collapse show" id="collapseCreate">
                <div class="card-body">
                     <form class="form-horizontal" method="post" action="/wallet" th:object="${wallet}">
 						<div class="form-group">
@@ -85,11 +85,11 @@
           <!-- Your Wallets card -->                
           <div class="card shadow mb-4">
              <!-- Card Header - Accordion -->
-             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+             <a href="#collapseList" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseList">
                 <h6 class="m-0 font-weight-bold text-primary" th:text="#{wallet.create.card.table}">Creating Wallet</h6>
              </a>
              <!-- Card Content - Collapse -->
-            <div class="collapse show" id="collapseCardExample">
+            <div class="collapse show" id="collapseList">
                <div class="card-body">
                    	<div class="table-responsive">
 						<table class="table table-hover">
@@ -97,12 +97,14 @@
 								<tr>
 									<th th:text="#{name}"></th>
 									<th th:text="#{address}"></th>
+									<th th:text="#{funds.available}"></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="wallet : ${walletList}">
 									<td th:text="${wallet.name}"></td>
 									<td th:text="${wallet.address}"></td>
+									<td th:text="${wallet.funds}"></td>
 								</tr>
 							</tbody>
 						</table>

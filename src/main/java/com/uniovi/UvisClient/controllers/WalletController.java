@@ -1,5 +1,7 @@
 package com.uniovi.UvisClient.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.Wallet;
-import com.uniovi.UvisClient.services.impl.UserServiceImpl;
-import com.uniovi.UvisClient.services.impl.WalletServiceImpl;
+import com.uniovi.UvisClient.services.BlockChainService;
+import com.uniovi.UvisClient.services.UserService;
+import com.uniovi.UvisClient.services.WalletService;
 import com.uniovi.UvisClient.services.security.SecurityService;
 import com.uniovi.UvisClient.validator.WalletFormValidator;
 
@@ -25,10 +28,13 @@ public class WalletController {
 	private SecurityService securityService;
 	
 	@Autowired
-	private WalletServiceImpl walletService;
+	private WalletService walletService;
 	
 	@Autowired 
-	private UserServiceImpl userService;
+	private UserService userService;
+	
+	@Autowired
+	private BlockChainService chainService;
 
 	@RequestMapping(value = "/wallet", method = RequestMethod.GET)
 	public String addWalletView(Model model) {
@@ -64,7 +70,8 @@ public class WalletController {
 	 */
 	private void fillCreateModel(Model model) {
 		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
-		model.addAttribute("walletList", user.getWallets());
+		List<Wallet> wallets = this.chainService.updateFunds(user);
+		model.addAttribute("walletList", wallets);
 	}
 
 }

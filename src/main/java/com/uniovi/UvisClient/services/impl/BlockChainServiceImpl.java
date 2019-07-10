@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.UvisClient.entities.User;
+import com.uniovi.UvisClient.entities.Wallet;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.entities.dto.WalletDto;
 import com.uniovi.UvisClient.repositories.BlockChainRepository;
@@ -58,6 +59,12 @@ public class BlockChainServiceImpl implements BlockChainService {
 	@Override
 	public int getTotalOfProcessedTransactions() {
 		return BlockChainRepository.getInstance().getTotalOfProcessedTransactions();
+	}
+
+	@Override
+	public List<Wallet> updateFunds(User user) {
+		user.getWallets().forEach(x -> x.setFunds(this.getBalanceByAddress(x.getAddress())));
+		return new ArrayList<Wallet>(user.getWallets());
 	}
 	
 }

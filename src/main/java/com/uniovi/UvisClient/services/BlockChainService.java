@@ -3,6 +3,7 @@ package com.uniovi.UvisClient.services;
 import java.util.List;
 
 import com.uniovi.UvisClient.entities.User;
+import com.uniovi.UvisClient.entities.Wallet;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.entities.dto.WalletDto;
 
@@ -80,5 +81,16 @@ public interface BlockChainService {
 	 * 			The number of total transactions contained in all the blocks of the chain.
 	 */
 	public int getTotalOfProcessedTransactions();
+	
+	/**
+	 * It sets all the funds to the wallets of a user by reading the values on the chain.
+	 * 
+	 * @param User
+	 * 			The user who needs to update his wallets funds.
+	 * 
+	 * @return List<Wallet>
+	 * 			The list of the user's wallets updated with the funds.
+	 */
+	public List<Wallet> updateFunds(User user);
 
 }
