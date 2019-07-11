@@ -2,12 +2,12 @@
 $(document).ready(function() {
 	value = $("#prueba").text();
 	if (value === 'Es') {
-		$('#dataTable').dataTable( {
+		$('#pending, #received, #sent').dataTable( {
 	        "language": {
 	        	"url": "/js/demo/dataTable_spanish.json"
 	        }
 	    } );
 	} else {
-		$('#dataTable').DataTable();
+		$('#pending, #received, #sent').DataTable();
 	} 
 } );

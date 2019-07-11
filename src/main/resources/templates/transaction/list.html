@@ -33,13 +33,13 @@
 					<!-- Transaction Info -->
 					<div class="card shadow mb-4">
 						<!-- Card Header - Accordion -->
-						<a href="#collapseCardExample" class="d-block card-header py-3"
+						<a href="#collapseDescription" class="d-block card-header py-3"
 							data-toggle="collapse" role="button" aria-expanded="true"
-							aria-controls="collapseCardExample">
+							aria-controls="collapseDescription">
 							<h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.list.card.title}">Creating Transaction</h6>
 						</a>
 						<!-- Card Content - Collapse -->
-						<div class="collapse show" id="collapseCardExample">
+						<div class="collapse show" id="collapseDescription">
 							<div class="card-body"
 								th:text="#{transaction.list.card.description}"></div>
 						</div>
@@ -56,15 +56,15 @@
 							<!-- Pending card -->
 							<div class="card shadow mb-4">
 								<!-- Card Header - Accordion -->
-								<a href="#collapseCardExample" class="d-block card-header py-3"
+								<a href="#collapsePending" class="d-block card-header py-3"
 									data-toggle="collapse" role="button" aria-expanded="true"
-									aria-controls="collapseCardExample">
+									aria-controls="collapsePending">
 									<h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.card.pending}"></h6>
 								</a>
 								<!-- Card Content - Collapse -->
-								<div class="collapse show" id="collapseCardExample">
+								<div class="collapse show" id="collapsePending">
 									<div class="card-body">
-										<table class="table table-hover">
+										<table class="table table-hover" id="pending" width="100%" cellspacing="0">
 											<thead>
 												<tr>
 													<th th:text="#{transaction.sender}"></th>
@@ -97,15 +97,15 @@
 							<!-- Received card -->
 							<div class="card shadow mb-4">
 								<!-- Card Header - Accordion -->
-								<a href="#collapseCardExample" class="d-block card-header py-3"
+								<a href="#collapseReceived" class="d-block card-header py-3"
 									data-toggle="collapse" role="button" aria-expanded="true"
-									aria-controls="collapseCardExample">
+									aria-controls="collapseReceived">
 									<h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.card.received}"></h6>
 								</a>
 								<!-- Card Content - Collapse -->
-								<div class="collapse show" id="collapseCardExample">
+								<div class="collapse show" id="collapseReceived">
 									<div class="card-body">
-										<table class="table table-hover">
+										<table class="table table-hover" id="received" width="100%" cellspacing="0">
 											<thead>
 												<tr>
 													<th th:text="#{transaction.sender}"></th>
@@ -138,15 +138,15 @@
 							<!-- Received card -->
 							<div class="card shadow mb-4">
 								<!-- Card Header - Accordion -->
-								<a href="#collapseCardExample" class="d-block card-header py-3"
+								<a href="#collapseSent" class="d-block card-header py-3"
 									data-toggle="collapse" role="button" aria-expanded="true"
-									aria-controls="collapseCardExample">
+									aria-controls="collapseSent">
 									<h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.card.sent}"></h6>
 								</a>
 								<!-- Card Content - Collapse -->
-								<div class="collapse show" id="collapseCardExample">
+								<div class="collapse show" id="collapseSent">
 									<div class="card-body">
-										<table class="table table-hover">
+										<table class="table table-hover" id="sent" width="100%" cellspacing="0">
 											<thead>
 												<tr>
 													<th th:text="#{transaction.sender}"></th>
@@ -200,12 +200,13 @@
 
 	<!-- Custom scripts for all pages-->
 	<script src="/js/sb-admin-2.min.js"></script>
-
+	
 	<!-- Page level plugins -->
-	<script src="/vendor/chart.js/Chart.min.js"></script>
-
-	<!-- Page level custom scripts -->
-	<script src="/js/demo/chart-pie-demo.js"></script>
+  	<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+  	<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  
+ 	<!-- Page level custom scripts -->
+  	<script src="/js/demo/datatables_transactions.js"></script>
 
 </body>
 

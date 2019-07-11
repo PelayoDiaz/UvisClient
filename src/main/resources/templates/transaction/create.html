@@ -32,11 +32,11 @@
           <!-- Wallet Info -->
           <div class="card shadow mb-4">
              <!-- Card Header - Accordion -->
-             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+             <a href="#collapseDescription" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDescription">
                 <h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.create.card.title}">Creating Transaction</h6>
              </a>
              <!-- Card Content - Collapse -->
-            <div class="collapse show" id="collapseCardExample">
+            <div class="collapse show" id="collapseDescription">
                <div class="card-body" th:text="#{transaction.create.card.description}">
                     
               </div>
@@ -52,11 +52,11 @@
           <!-- Create a Wallet card -->                
           <div class="card shadow mb-4">
              <!-- Card Header - Accordion -->
-             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+             <a href="#collapseForm" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="#collapseForm">
                 <h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.create.card.form}">Creating Transaction</h6>
              </a>
              <!-- Card Content - Collapse -->
-            <div class="collapse show" id="collapseCardExample">
+            <div class="collapse show" id="#collapseForm">
                <div class="card-body">
                		<form class="form-horizontal" method="post" action="/transaction" th:object="${transaction}">
 						
@@ -72,19 +72,29 @@
 						
 						<div class="form-group blu-margin">
 							<h3 th:text="#{transaction.create}"></h3>
-							<label class="control-label col-sm-2" for="receiver" th:text="#{transaction.receiver.address}"></label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-12" for="receiver" th:text="#{transaction.receiver.address}"></label>
+							<div class="col-sm-12">
 								<input type="text" class="form-control" name="receiver"
 									th:placeholder="#{address}" required="true" />
 								<span class="text-danger" th:if="${#fields.hasErrors('receiver')}" th:errors="*{receiver}">
 							</div>
 						</div>
-						<div class="form-group blu-margin">	
-							<label class="control-label col-sm-2" for="amount" th:text="#{amount}"></label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" name="amount"
-									th:placeholder="#{amount.example}" required="true" />
-								<span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
+						<div class="row">
+							<div class="form-group blu-margin col-sm-6">	
+								<label class="control-label col-sm-12" for="amount" th:text="#{amount}"></label>
+								<div class="col-sm-12">
+									<input type="text" class="form-control" name="amount"
+										th:placeholder="#{amount.example}" required="true" />
+									<span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
+								</div>
+							</div>
+							<div class="form-group blu-margin col-sm-6">	
+								<label class="control-label col-sm-12" for="available" th:text="#{funds.available}"></label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" name="available" id="available"
+										th:placeholder="#{amount.example}" disabled="true" />
+									<span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
+								</div>
 							</div>
 						</div>
 						
@@ -104,6 +114,20 @@
 		</div>
       </div>
       <!-- End of Main Content -->
+      
+      <script th:inline="javascript">
+      	/*<![CDATA[*/
+      		$('#wallets').change(function() {
+      			var index = $('#wallets').prop('selectedIndex');
+      			var prueba = /*[[${funds}]]*/;
+      			if (index>0) {
+      				$('#available').val(prueba[index - 1]);
+      			} else {
+      				$('#available').val('0.0');
+      			}
+      		});      		
+      	/*]]>*/
+      </script>
 
       <!-- Footer -->
       <footer th:replace="fragments/footer" />
@@ -129,12 +153,6 @@
 
   <!-- Custom scripts for all pages-->
   <script src="/js/sb-admin-2.min.js"></script>
-  
-  <!-- Page level plugins -->
-  <script src="/vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="/js/demo/chart-pie-demo.js"></script>
 
 </body>
 

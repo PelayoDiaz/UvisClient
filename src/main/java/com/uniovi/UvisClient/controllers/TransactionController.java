@@ -1,5 +1,8 @@
 package com.uniovi.UvisClient.controllers;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
 import com.uniovi.UvisClient.communication.Sender;
 import com.uniovi.UvisClient.entities.User;
+import com.uniovi.UvisClient.entities.Wallet;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.repositories.BlockChainRepository;
 import com.uniovi.UvisClient.services.BlockChainService;
@@ -50,7 +54,10 @@ public class TransactionController {
 	public String addTransactionView(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
 		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
 		model.addAttribute("transaction", new TransactionDto());
-		model.addAttribute("walletsList", user.getWallets());
+		List<Wallet> wallets = this.chainService.updateFunds(user);
+		List<Double> funds = wallets.stream().map(x -> x.getFunds()).collect(Collectors.toList());
+		model.addAttribute("walletsList", wallets);
+		model.addAttribute("funds", funds);
 		return "transaction/create";
 	}
 	
@@ -58,7 +65,7 @@ public class TransactionController {
 	public String addTransaction(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
 		this.transactionFormValidator.validate(transaction, result);
 		if (result.hasErrors()) {
-			return "redirect:transaction/add";
+			return "redirect:transaction/send";
 		}
 		Sender sender = new Sender(transaction, BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
 		sender.start();
