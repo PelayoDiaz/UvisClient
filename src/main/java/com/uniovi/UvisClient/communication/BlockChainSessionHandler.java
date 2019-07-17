@@ -47,7 +47,6 @@ public class BlockChainSessionHandler extends StompSessionHandlerAdapter {
     	} else {
     		logger.info("Something went wrong while getting de chain.");
     	}
-//    	this.session.disconnect();
     	
     }
 
