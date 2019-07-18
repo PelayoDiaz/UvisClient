@@ -15,15 +15,12 @@ import java.lang.reflect.Type;
 public class BlockChainSessionHandler extends StompSessionHandlerAdapter {
 
 	private Logger logger = LogManager.getLogger(BlockChainSessionHandler.class);
-	
-	private StompSession session;
 
     @Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
         logger.info("New session established : " + session.getSessionId());
         session.subscribe("/topic/blockchainClient", this);
         logger.info("Subscribed to /topic/blockchainClient");
-        this.session = session;
     }
 
     @Override

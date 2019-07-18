@@ -6,17 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
-import com.uniovi.UvisClient.communication.Sender;
-import com.uniovi.UvisClient.entities.dto.BlockChainDto;
 import com.uniovi.UvisClient.repositories.BlockChainRepository;
 import com.uniovi.UvisClient.services.BlockChainService;
 
 @Controller
 public class HomeController {
-	
-	public static final String LISTENER = "/app/chain/sendChain";
-	
+		
 	@Autowired
 	private BlockChainService chainService;
 	
@@ -39,8 +34,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public synchronized String login(Model model) {
-		Sender sender = new Sender(new BlockChainDto(), BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
-		sender.start();
+//		Sender sender = new Sender(new BlockChainDto(), BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
+//		sender.start();
 		return "login";
 	}
 	

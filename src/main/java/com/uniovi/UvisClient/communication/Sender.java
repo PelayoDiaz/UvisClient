@@ -8,6 +8,13 @@ import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import com.uniovi.UvisClient.entities.dto.AbstractDto;
 import com.uniovi.UvisClient.repositories.BlockChainRepository;
 
+/**
+ * It establish the communication with the node and searches new nodes to 
+ * communicate with in case the actual node is disconnected.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 public class Sender extends Thread {
 	
 	private Logger logger = LogManager.getLogger(Sender.class);
