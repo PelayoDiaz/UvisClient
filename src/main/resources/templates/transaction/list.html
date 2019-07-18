@@ -64,22 +64,24 @@
 								<!-- Card Content - Collapse -->
 								<div class="collapse show" id="collapsePending">
 									<div class="card-body">
-										<table class="table table-hover" id="pending" width="100%" cellspacing="0">
-											<thead>
-												<tr>
-													<th th:text="#{transaction.sender}"></th>
-													<th th:text="#{transaction.receiver}"></th>
-													<th th:text="#{amount}"></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr th:each="transaction : ${pendingTransactionsList}">
-													<td th:text="${transaction.senderAddress}"></td>
-													<td th:text="${transaction.receiver}"></td>
-													<td th:text="${transaction.amount}"></td>
-												</tr>
-											</tbody>
-										</table>
+										<div class="table-responsive">
+											<table class="table table-hover" id="pending" width="100%" cellspacing="0">
+												<thead>
+													<tr>
+														<th th:text="#{transaction.sender}"></th>
+														<th th:text="#{transaction.receiver}"></th>
+														<th th:text="#{amount}"></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="transaction : ${pendingTransactionsList}">
+														<td th:text="${transaction.senderAddress}"></td>
+														<td th:text="${transaction.receiver}"></td>
+														<td th:text="${transaction.amount}"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -105,22 +107,24 @@
 								<!-- Card Content - Collapse -->
 								<div class="collapse show" id="collapseReceived">
 									<div class="card-body">
-										<table class="table table-hover" id="received" width="100%" cellspacing="0">
-											<thead>
-												<tr>
-													<th th:text="#{transaction.sender}"></th>
-													<th th:text="#{transaction.receiver}"></th>
-													<th th:text="#{amount}"></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr th:each="transaction : ${receivedTransactionsList}">
-													<td th:text="${transaction.senderAddress}"></td>
-													<td th:text="${transaction.receiver}"></td>
-													<td th:text="${transaction.amount}"></td>
-												</tr>
-											</tbody>
-										</table>
+										<div class="table-responsive">
+											<table class="table table-hover" id="received" width="100%" cellspacing="0">
+												<thead>
+													<tr>
+														<th th:text="#{transaction.sender}"></th>
+														<th th:text="#{transaction.receiver}"></th>
+														<th th:text="#{amount}"></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="transaction : ${receivedTransactionsList}">
+														<td th:text="${transaction.senderAddress}"></td>
+														<td th:text="${transaction.receiver}"></td>
+														<td th:text="${transaction.amount}"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -146,22 +150,24 @@
 								<!-- Card Content - Collapse -->
 								<div class="collapse show" id="collapseSent">
 									<div class="card-body">
-										<table class="table table-hover" id="sent" width="100%" cellspacing="0">
-											<thead>
-												<tr>
-													<th th:text="#{transaction.sender}"></th>
-													<th th:text="#{transaction.receiver}"></th>
-													<th th:text="#{amount}"></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr th:each="transaction : ${sentTransactionsList}">
-													<td th:text="${transaction.senderAddress}"></td>
-													<td th:text="${transaction.receiver}"></td>
-													<td th:text="${transaction.amount}"></td>
-												</tr>
-											</tbody>
-										</table>
+										<div class="table-responsive">
+											<table class="table table-hover" id="sent" width="100%" cellspacing="0">
+												<thead>
+													<tr>
+														<th th:text="#{transaction.sender}"></th>
+														<th th:text="#{transaction.receiver}"></th>
+														<th th:text="#{amount}"></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="transaction : ${sentTransactionsList}">
+														<td th:text="${transaction.senderAddress}"></td>
+														<td th:text="${transaction.receiver}"></td>
+														<td th:text="${transaction.amount}"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>

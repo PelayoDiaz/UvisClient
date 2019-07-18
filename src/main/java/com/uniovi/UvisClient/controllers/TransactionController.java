@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,26 +51,37 @@ public class TransactionController {
 		return "transaction/list";
 	}
 	
-	@RequestMapping(value = "/transaction/send", method = RequestMethod.GET)
+	@RequestMapping(value = "/transaction", method = RequestMethod.GET)
 	public String addTransactionView(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
+		this.fillSendModel(model);
+		return "transaction/create";
+	}
+	
+	@RequestMapping(value = "/transaction", method = RequestMethod.POST)
+	public String addTransaction(@Validated TransactionDto transaction, BindingResult result, Model model) {
+		this.transactionFormValidator.validate(transaction, result);
+		if (result.hasErrors()) {
+			this.fillSendModel(model);
+			return "transaction/create";
+		}
+		Sender sender = new Sender(transaction, BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
+		sender.start();
+		return "redirect:transaction/list";
+	}
+	
+	/**
+	 * Fills the model with the params required..
+	 * 
+	 * @param model
+	 * 			The model
+	 */
+	private void fillSendModel(Model model) {
 		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
 		model.addAttribute("transaction", new TransactionDto());
 		List<Wallet> wallets = this.chainService.updateFunds(user);
 		List<Double> funds = wallets.stream().map(x -> x.getFunds()).collect(Collectors.toList());
 		model.addAttribute("walletsList", wallets);
 		model.addAttribute("funds", funds);
-		return "transaction/create";
-	}
-	
-	@RequestMapping(value = "/transaction", method = RequestMethod.POST)
-	public String addTransaction(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
-		this.transactionFormValidator.validate(transaction, result);
-		if (result.hasErrors()) {
-			return "redirect:transaction/send";
-		}
-		Sender sender = new Sender(transaction, BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
-		sender.start();
-		return "redirect:transaction/list";
 	}
 
 }
