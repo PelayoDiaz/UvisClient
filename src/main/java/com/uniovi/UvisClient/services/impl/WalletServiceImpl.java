@@ -1,6 +1,7 @@
 package com.uniovi.UvisClient.services.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,14 @@ public class WalletServiceImpl implements WalletService {
 	}
 	
 	@Override
-	public void addWallet(Wallet wallet) {
+	public void createWallet(Wallet wallet) {
 		String address = CryptoUtil.getSha256Hash(
 				wallet.getUser().getUsername() + 
 				wallet.getName() + 
 				wallet.getUser().getName() + 
 				wallet.getUser().getSurname1() + 
-				wallet.getUser().getSurname2());
+				wallet.getUser().getSurname2() +
+				new Date().getTime());
 		wallet.setAddress(address);
 		Sender sender = new Sender(DtoConverter.toDto(wallet), BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
 		sender.start();

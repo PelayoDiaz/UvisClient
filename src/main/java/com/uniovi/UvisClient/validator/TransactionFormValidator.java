@@ -34,7 +34,7 @@ public class TransactionFormValidator implements Validator {
 	}
 	
 	/**
-	 * Checks if the sender is valid. For a receiver to be valid, it must have 
+	 * Checks if the sender is valid. For a sender to be valid, it must have 
 	 * and address in the blockchain and in the data base.
 	 * 
 	 * @param transaction

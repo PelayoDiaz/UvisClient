@@ -33,9 +33,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public synchronized String login(Model model) {
-//		Sender sender = new Sender(new BlockChainDto(), BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
-//		sender.start();
+	public String login(Model model) {
 		return "login";
 	}
 	

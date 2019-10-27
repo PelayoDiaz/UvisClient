@@ -19,7 +19,7 @@ import com.uniovi.UvisClient.entities.Wallet;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.repositories.BlockChainRepository;
 import com.uniovi.UvisClient.services.BlockChainService;
-import com.uniovi.UvisClient.services.impl.UserServiceImpl;
+import com.uniovi.UvisClient.services.UserService;
 import com.uniovi.UvisClient.services.security.SecurityService;
 import com.uniovi.UvisClient.validator.TransactionFormValidator;
 
@@ -29,7 +29,7 @@ public class TransactionController {
 	public static final String LISTENER = "/app/chain/createTransaction";
 	
 	@Autowired 
-	private UserServiceImpl userService;
+	private UserService userService;
 	
 	@Autowired 
 	private BlockChainService chainService;
@@ -52,13 +52,13 @@ public class TransactionController {
 	}
 	
 	@RequestMapping(value = "/transaction", method = RequestMethod.GET)
-	public String addTransactionView(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
+	public String createTransactionView(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
 		this.fillSendModel(model);
 		return "transaction/create";
 	}
 	
 	@RequestMapping(value = "/transaction", method = RequestMethod.POST)
-	public String addTransaction(@Validated TransactionDto transaction, BindingResult result, Model model) {
+	public String createTransaction(@Validated TransactionDto transaction, BindingResult result, Model model) {
 		this.transactionFormValidator.validate(transaction, result);
 		if (result.hasErrors()) {
 			this.fillSendModel(model);

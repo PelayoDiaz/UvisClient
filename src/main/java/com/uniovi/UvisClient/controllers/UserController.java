@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.UvisClient.entities.User;
-import com.uniovi.UvisClient.services.impl.UserServiceImpl;
+import com.uniovi.UvisClient.services.UserService;
 import com.uniovi.UvisClient.services.security.SecurityService;
 import com.uniovi.UvisClient.validator.SignUpFormValidator;
 
@@ -17,7 +17,7 @@ import com.uniovi.UvisClient.validator.SignUpFormValidator;
 public class UserController {
 
 	@Autowired
-	private UserServiceImpl usersService;
+	private UserService usersService;
 
 	@Autowired
 	private SecurityService securityService;
@@ -44,7 +44,7 @@ public class UserController {
 		if (result.hasErrors()) {
 			return "signup";
 		}
-		usersService.addUser(user);
+		usersService.createUser(user);
 		securityService.autoLogin(user.getUsername(), user.getPasswordConfirm());
 		return "redirect:home";
 	}

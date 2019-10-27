@@ -37,14 +37,14 @@ public class WalletController {
 	private BlockChainService chainService;
 
 	@RequestMapping(value = "/wallet", method = RequestMethod.GET)
-	public String addWalletView(Model model) {
+	public String createWalletView(Model model) {
 		this.fillCreateModel(model);
 		model.addAttribute("wallet", new Wallet());
 		return "wallet/create";
 	}
 	
 	@RequestMapping(value = "/wallet", method = RequestMethod.POST)
-	public String addWallet(@Validated Wallet wallet, BindingResult result, Model model) {
+	public String createWallet(@Validated Wallet wallet, BindingResult result, Model model) {
 		this.walletFormValidator.validate(wallet, result);
 		if (result.hasErrors()) {
 			this.fillCreateModel(model);
@@ -52,7 +52,7 @@ public class WalletController {
 		}
 		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
 		wallet.setUser(user);
-		this.walletService.addWallet(wallet);
+		this.walletService.createWallet(wallet);
 		return "redirect:wallet";
 	}
 	

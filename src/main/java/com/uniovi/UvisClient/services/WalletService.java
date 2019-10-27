@@ -25,7 +25,7 @@ public interface WalletService {
 	 * @param wallet
 	 * 			The wallet to be stored.
 	 */
-	public void addWallet(Wallet wallet);
+	public void createWallet(Wallet wallet);
 	
 	/**
 	 * Searches a wallet by its address.

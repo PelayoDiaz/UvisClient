@@ -29,12 +29,12 @@ public class InsertSampleDataService {
 		User user6 = new User("99999988F", "Edward", "Núñez", "Fernandez");
 		user6.setPassword("123456");
 		
-		usersService.addUser(user1);
-		usersService.addUser(user2);
-		usersService.addUser(user3);
-		usersService.addUser(user4);
-		usersService.addUser(user5);
-		usersService.addUser(user6);
+		usersService.createUser(user1);
+		usersService.createUser(user2);
+		usersService.createUser(user3);
+		usersService.createUser(user4);
+		usersService.createUser(user5);
+		usersService.createUser(user6);
 	}
 
 }

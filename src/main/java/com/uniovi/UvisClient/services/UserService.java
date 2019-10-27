@@ -20,7 +20,7 @@ public interface UserService {
 	 * @param user
 	 * 			The new user to be added.
 	 */
-	public void addUser(User user);
+	public void createUser(User user);
 	
 	/**
 	 * Finds users by their usernames.
