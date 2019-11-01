@@ -58,42 +58,40 @@
              <!-- Card Content - Collapse -->
             <div class="collapse show" id="#collapseForm">
                <div class="card-body">
-               		<form class="form-horizontal" method="post" action="/transaction" th:object="${transaction}">
+               		<form class="form-horizontal" method="post" action="/transaction" th:object="${transactionDto}">
 						
 						<div class="form-group blu-margin">
-							<h3 th:text="#{wallet.select}"></h3>
-							<select class="form-control" id="wallets" name="senderAddress">
+							<label class="h3" for="senderAddress" th:text="#{wallet.select}"></label>
+							<select class="form-control" name="senderAddress" id="senderAddress">
 								<option value="0" th:text="#{wallet.select}"></option>
 								<option th:each="wallet : ${walletsList}" th:value="${wallet.address}"
 									th:text="${wallet.name}"></option>
-								<span class="text-danger" th:if="${#fields.hasErrors('senderAddress')}" th:errors="*{senderAddress}">
 							</select>
+							<span class="text-danger" th:if="${#fields.hasErrors('senderAddress')}" th:errors="*{senderAddress}"/>
 						</div>
 						
 						<div class="form-group blu-margin">
 							<h3 th:text="#{transaction.create}"></h3>
 							<label class="control-label col-sm-12" for="receiver" th:text="#{transaction.receiver.address}"></label>
 							<div class="col-sm-12">
-								<input type="text" class="form-control" name="receiver"
+								<input type="text" class="form-control" name="receiver" id="receiver"
 									th:placeholder="#{address}" required="true" />
-								<span class="text-danger" th:if="${#fields.hasErrors('receiver')}" th:errors="*{receiver}">
+								<span class="text-danger" th:if="${#fields.hasErrors('receiver')}" th:errors="*{receiver}"/>
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group blu-margin col-sm-6">	
 								<label class="control-label col-sm-12" for="amount" th:text="#{amount}"></label>
 								<div class="col-sm-12">
-									<input type="text" class="form-control" name="amount"
+								    <input type="text" class="form-control" name="amount" id="amount"
 										th:placeholder="#{amount.example}" required="true" />
-									<span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
+									<span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"/>
 								</div>
 							</div>
 							<div class="form-group blu-margin col-sm-6">	
 								<label class="control-label col-sm-12" for="available" th:text="#{funds.available}"></label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" name="available" id="available"
+								<input type="text" class="form-control" name="available" id="available"
 										th:placeholder="#{amount.example}" disabled="true" />
-								</div>
 							</div>
 						</div>
 						

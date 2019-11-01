@@ -1,6 +1,7 @@
 package com.uniovi.UvisClient.controllers;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,28 +9,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.uniovi.UvisClient.communication.BlockChainSessionHandler;
-import com.uniovi.UvisClient.communication.Sender;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.entities.Wallet;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
-import com.uniovi.UvisClient.repositories.BlockChainRepository;
 import com.uniovi.UvisClient.services.BlockChainService;
 import com.uniovi.UvisClient.services.UserService;
+import com.uniovi.UvisClient.services.WalletService;
 import com.uniovi.UvisClient.services.security.SecurityService;
 import com.uniovi.UvisClient.validator.TransactionFormValidator;
 
 @Controller
 public class TransactionController {
 	
-	public static final String LISTENER = "/app/chain/createTransaction";
-	
 	@Autowired 
 	private UserService userService;
+	
+	@Autowired 
+	private WalletService walletService;
 	
 	@Autowired 
 	private BlockChainService chainService;
@@ -51,33 +50,32 @@ public class TransactionController {
 		return "transaction/list";
 	}
 	
-	@RequestMapping(value = "/transaction", method = RequestMethod.GET)
-	public String createTransactionView(@ModelAttribute("transaction") TransactionDto transaction, BindingResult result, Model model) {
-		this.fillSendModel(model);
+	@RequestMapping(value = "transaction", method = RequestMethod.GET)
+	public String createWalletView(Model model) {
+		this.fillCreateModel(model);
+		model.addAttribute("transactionDto", new TransactionDto());
 		return "transaction/create";
 	}
 	
 	@RequestMapping(value = "/transaction", method = RequestMethod.POST)
-	public String createTransaction(@Validated TransactionDto transaction, BindingResult result, Model model) {
-		this.transactionFormValidator.validate(transaction, result);
+	public String createTransaction(@Validated TransactionDto transactionDto, BindingResult result, Model model) {
+		this.transactionFormValidator.validate(transactionDto, result);
 		if (result.hasErrors()) {
-			this.fillSendModel(model);
+			this.fillCreateModel(model);
 			return "transaction/create";
 		}
-		Sender sender = new Sender(transaction, BlockChainRepository.getInstance().getActualNode().getUrl(), new BlockChainSessionHandler(), LISTENER);
-		sender.start();
+		this.walletService.sendFunds(transactionDto);
 		return "redirect:transaction/list";
 	}
 	
 	/**
-	 * Fills the model with the params required..
+	 * Fills the model with the params required.
 	 * 
 	 * @param model
 	 * 			The model
 	 */
-	private void fillSendModel(Model model) {
+	private void fillCreateModel(Model model) {
 		User user = this.userService.getUserByUsername(this.securityService.findLoggedInUsername());
-		model.addAttribute("transaction", new TransactionDto());
 		List<Wallet> wallets = this.chainService.updateFunds(user);
 		List<Double> funds = wallets.stream().map(x -> x.getFunds()).collect(Collectors.toList());
 		model.addAttribute("walletsList", wallets);

@@ -23,20 +23,20 @@
 
                 <div class="form-group">
                   	<label class="control-label col-sm-12" th:text="#{username}" for="username">Username</label>
-                    <input type="text" class="form-control form-control-user" name="username" th:placeholder="#{username.placeholder}" required="true">
-                    <span class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+                    <input type="text" class="form-control form-control-user" id="username" name="username" th:placeholder="#{username.placeholder}" required="true">
+                    <span class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
                 </div>
                 
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label class="control-label col-sm-12" th:text="#{password}" for="password">Password</label>
-                    <input type="password" class="form-control form-control-user" name="password" th:placeholder="#{password.placeholder}" required="true">
-                  	<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                    <input type="password" class="form-control form-control-user" id="password" name="password" th:placeholder="#{password.placeholder}" required="true">
+                  	<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
                   </div>
                   <div class="col-sm-6">
                     <label class="control-label col-sm-12" th:text="#{password.repeat}" for="passwordConfirm">Password Repeat</label>
-                    <input type="password" class="form-control form-control-user" name="passwordConfirm" th:placeholder="#{password.repeat.placeholder}" required="true">
-                  	<span class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">
+                    <input type="password" class="form-control form-control-user" id="passwordConfirm" name="passwordConfirm" th:placeholder="#{password.repeat.placeholder}" required="true">
+                  	<span class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"/>
                   </div>
                 </div>
                 <hr>
@@ -46,20 +46,20 @@
                 
                 <div class="form-group">
                   <label class="control-label col-sm-12" th:text="#{name}" for="name">Name:</label>
-                  <input type="text" class="form-control form-control-user" name="name" th:placeholder="#{name.placeholder}" required="true">
-                  <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                  <input type="text" class="form-control form-control-user" id="name" name="name" th:placeholder="#{name.placeholder}" required="true">
+                  <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
                 </div>
                 
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <label class="control-label col-sm-12" th:text="#{surname.first}" for="surname1">First Surname</label>
-                    <input type="text" class="form-control form-control-user" name="surname1" th:placeholder="#{surname.first.placeholder}" required="true">
-                  	<span class="text-danger" th:if="${#fields.hasErrors('surname1')}" th:errors="*{surname1}">
+                    <input type="text" class="form-control form-control-user" id="surname1" name="surname1" th:placeholder="#{surname.first.placeholder}" required="true">
+                  	<span class="text-danger" th:if="${#fields.hasErrors('surname1')}" th:errors="*{surname1}"/>
                   </div>
                   <div class="col-sm-6">
                     <label class="control-label col-sm-12" th:text="#{surname.second}" for="surname2">Second Surname</label>
-                    <input type="text" class="form-control form-control-user" name="surname2" th:placeholder="#{surname.second.placeholder}" required="true">
-                  	<span class="text-danger" th:if="${#fields.hasErrors('surname2')}" th:errors="*{surname2}">
+                    <input type="text" class="form-control form-control-user" id="surname2" name="surname2" th:placeholder="#{surname.second.placeholder}" required="true">
+                  	<span class="text-danger" th:if="${#fields.hasErrors('surname2')}" th:errors="*{surname2}"/>
                   </div>
                 </div>
                 

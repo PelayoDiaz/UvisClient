@@ -77,9 +77,9 @@ public class TransactionFormValidator implements Validator {
 	 */
 	private void checkFunds(TransactionDto transaction, Errors errors) {
 		if (transaction.amount < 0.01) {
-			errors.reject("amount", "error.transaction.minimum.amount");
+			errors.rejectValue("amount", "error.transaction.minimum.amount");
 		} else if (transaction.amount > this.chainService.getBalanceByAddress(transaction.senderAddress)) {
-			errors.reject("amount", "error.transaction.sender.no.funds");
+			errors.rejectValue("amount", "error.transaction.sender.no.funds");
 		}
 	}
 

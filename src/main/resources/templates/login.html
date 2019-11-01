@@ -26,14 +26,15 @@
                   <form class="user" method="post" action="/login">
                     <div class="form-group">
                       <label class="control-label col-sm-12" for="username" th:text="#{username}"></label>
-                      <input type="text" class="form-control form-control-user" name="username"
-                      		aria-describedby="emailHelp" th:placeholder="#{username.placeholder}" required="true"/>
+                      <input type="text" class="form-control form-control-user" name="username" id="username"
+                      		th:placeholder="#{username.placeholder}" required="true"/>
                     </div>
                     <div class="form-group">
                       <label class="control-label col-sm-12" for="password" th:text="#{password}"></label>
-                      <input type="password" class="form-control form-control-user" name="password"
+                      <input type="password" class="form-control form-control-user" name="password" id="password"
                       		th:placeholder="#{password.placeholder}" required="true"/>
                     </div>
+                    <span class="text-danger" th:if="${(param.error != null) and (param.error[0] == 'true')}" th:text="#{error.login}"/>
                     <div class="form-group">
 						<button type="submit" class="btn btn-primary btn-user btn-block" th:text="#{login.button}"></button>
 					</div>

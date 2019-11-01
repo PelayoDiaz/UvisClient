@@ -3,6 +3,7 @@ package com.uniovi.UvisClient.services;
 import java.util.List;
 
 import com.uniovi.UvisClient.entities.Wallet;
+import com.uniovi.UvisClient.entities.dto.TransactionDto;
 
 public interface WalletService {
 
@@ -26,6 +27,14 @@ public interface WalletService {
 	 * 			The wallet to be stored.
 	 */
 	public void createWallet(Wallet wallet);
+	
+	/**
+	 * Sends the transaction data to the blockchain to be created.
+	 * 
+	 * @param transactionDto
+	 * 			The information of the transaction to be created.
+	 */
+	public void sendFunds(TransactionDto transactionDto);
 	
 	/**
 	 * Searches a wallet by its address.
