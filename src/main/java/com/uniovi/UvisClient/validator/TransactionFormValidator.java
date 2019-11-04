@@ -3,6 +3,7 @@ package com.uniovi.UvisClient.validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
@@ -43,6 +44,7 @@ public class TransactionFormValidator implements Validator {
 	 * 			Errors
 	 */
 	private void checkSender(TransactionDto transaction, Errors errors) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "senderAddress", "error.empty");
 		if (this.chainService.getWalletByAddress(transaction.senderAddress) == null) {
 			errors.rejectValue("senderAddress", "error.transaction.sender.no.exists");
 		} else if (this.walletService.getWalletByAddress(transaction.senderAddress) == null) {
@@ -60,6 +62,7 @@ public class TransactionFormValidator implements Validator {
 	 * 			Errors
 	 */
 	private void checkReceiver(TransactionDto transaction, Errors errors) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "receiver", "error.empty");
 		if (this.chainService.getWalletByAddress(transaction.receiver) == null) {
 			errors.rejectValue("receiver", "error.transaction.receiver.no.exists");
 		} else if (this.walletService.getWalletByAddress(transaction.receiver) == null) {

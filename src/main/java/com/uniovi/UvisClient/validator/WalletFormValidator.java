@@ -3,6 +3,7 @@ package com.uniovi.UvisClient.validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.uniovi.UvisClient.entities.Wallet;
@@ -25,6 +26,7 @@ public class WalletFormValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "error.empty");
 		Wallet wallet = (Wallet) target;
 		String loggedUsername = securityService.findLoggedInUsername();
 		
