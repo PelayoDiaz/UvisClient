@@ -114,8 +114,8 @@
       
       <script th:inline="javascript">
       	/*<![CDATA[*/
-      		$('#wallets').change(function() {
-      			var index = $('#wallets').prop('selectedIndex');
+      		$('#senderAddress').change(function() {
+      			var index = $('#senderAddress').prop('selectedIndex');
       			var prueba = /*[[${funds}]]*/;
       			if (index>0) {
       				$('#available').val(prueba[index - 1]);

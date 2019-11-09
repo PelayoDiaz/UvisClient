@@ -50,7 +50,7 @@ public class TransactionController {
 	}
 	
 	@RequestMapping(value = "transaction", method = RequestMethod.GET)
-	public String createWalletView(Model model) {
+	public String createTransactionView(Model model) {
 		this.fillCreateModel(model);
 		model.addAttribute("transactionDto", new TransactionDto());
 		return "transaction/create";

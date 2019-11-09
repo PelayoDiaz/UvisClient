@@ -24,12 +24,6 @@ public class UserController {
 	
 	@Autowired 
 	private SignUpFormValidator signUpFormValidator;
-
-	@RequestMapping("/user/list")
-	public String getListado(Model model) {
-		model.addAttribute("usersList", usersService.getUsers());
-		return "user/list";
-	}
 	
 	@RequestMapping(value = { "/signup" }, method = RequestMethod.GET)
 	public String signup(Model model) {
@@ -37,7 +31,6 @@ public class UserController {
 		return "signup";
 	}
 	
-	//public String signup(@ModelAttribute("user") User user, Model model) {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(@ModelAttribute("user") User user, BindingResult result, Model model) {
 		this.signUpFormValidator.validate(user, result);
