@@ -10,6 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+/**
+ * The users that interact with the application.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 @Entity
 public class User {
 	
@@ -17,22 +23,44 @@ public class User {
 	@GeneratedValue
 	private long id;
 	
+	/** The username. */
 	@Column(unique = true)
 	private String username;
+	
+	/** The password. */
 	private String password;
+	
+	/** The personal name. */
 	private String name;
+	
+	/** The first surname. */
 	private String surname1;
+	
+	/** The second surname. */
 	private String surname2;
 	
+	/** Only used to verify that passwords are equals into the sign up page. */
 	@Transient 
 	private String passwordConfirm;
 	
+	/** The wallets that belong to the user. */
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Wallet> wallets;
 	
 	public User() {}
 
-
+	/**
+	 * Constructor.
+	 *  
+	 * @param username
+	 * 			The username.
+	 * @param name
+	 * 			The name.
+	 * @param surname1
+	 * 			The first surname.
+	 * @param surname2
+	 * 			The second surname.
+	 */
 	public User(String username, String name, String surname1, String surname2) {
 		super();
 		this.username = username;

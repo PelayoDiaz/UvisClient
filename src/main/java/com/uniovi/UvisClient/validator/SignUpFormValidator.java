@@ -8,6 +8,13 @@ import org.springframework.stereotype.Component;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.services.impl.UserServiceImpl;
 
+/**
+ * Validator for the sign up form.
+ * It checks if the data introduced is correct.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 @Component
 public class SignUpFormValidator implements Validator {
 

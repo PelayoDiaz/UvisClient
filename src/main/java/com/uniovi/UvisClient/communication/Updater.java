@@ -17,6 +17,18 @@ public class Updater extends Sender {
 	
 	private Logger logger = LogManager.getLogger(Updater.class);
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param dto
+	 * 			The information in a dto to send
+	 * @param url
+	 * 			The url of the node to connect
+	 * @param handler
+	 * 			The handler of the sessions established
+	 * @param listener
+	 * 			The listener where the node is listening
+	 */
 	public Updater(AbstractDto dto, String url, StompSessionHandlerAdapter handler, String listener) {
 		super(dto, url, handler, listener);
 	}

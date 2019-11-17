@@ -5,6 +5,12 @@ import java.util.List;
 import com.uniovi.UvisClient.entities.Wallet;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 
+/**
+ * Interface to contain all the methods that they relate with the wallets.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 public interface WalletService {
 
 	/**

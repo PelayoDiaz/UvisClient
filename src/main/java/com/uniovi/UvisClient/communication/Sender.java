@@ -27,7 +27,7 @@ public class Sender extends Thread {
 	public static StompSession session = null;
 
 	/**
-	 * Class to communicate with the blockchain protocol where the chain is stored.
+	 * Constructor.
 	 * 
 	 * @param dto
 	 * 			The information in a dto to send

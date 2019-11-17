@@ -2,6 +2,12 @@ package com.uniovi.UvisClient.entities.dto;
 
 import java.io.Serializable;
 
+/**
+ * The nodes connected into the net.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 public class Node extends AbstractDto implements Serializable {
 	
 	/**
@@ -14,6 +20,12 @@ public class Node extends AbstractDto implements Serializable {
 	
 	public Node() {}
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param url
+	 * 			The ip address and the port where the node server is running.
+	 */
 	public Node(String url) {
 		super();
 		this.url = url;

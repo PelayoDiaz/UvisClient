@@ -8,6 +8,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+/**
+ * Class used to identify where to send and receive transactions.
+ * It is the equivalent to the wallets contained in the chain.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 @Entity
 public class Wallet {
 	
@@ -15,11 +22,14 @@ public class Wallet {
 	@GeneratedValue
 	private long id;
 	
+	/** The name of the Wallet. */
 	private String name;
 	
+	/** The address of the Wallet. */
 	@Column(unique = true)
 	private String address;
 	
+	/** The user the wallet belongs to. */
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

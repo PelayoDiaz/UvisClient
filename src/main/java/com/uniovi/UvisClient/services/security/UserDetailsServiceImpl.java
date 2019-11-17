@@ -14,6 +14,12 @@ import org.springframework.stereotype.Service;
 import com.uniovi.UvisClient.entities.User;
 import com.uniovi.UvisClient.repositories.UserRepository;
 
+/**
+ * Class to obtain the user details.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 

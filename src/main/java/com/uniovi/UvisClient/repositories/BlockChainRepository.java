@@ -9,6 +9,13 @@ import com.uniovi.UvisClient.entities.dto.Node;
 import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.entities.dto.WalletDto;
 
+/**
+ * Class with a singleton pattern which contains the chain 
+ * obtained from the nodes.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 public class BlockChainRepository {
 	
 	/** The unique Blockchain to be instantiated. */
@@ -20,6 +27,13 @@ public class BlockChainRepository {
 	/** The actual node the application communicates with. */ 
 	private Node actualNode;
 	
+	/**
+	 * Method to access the blockchain. It creates a new blockchain repository if it
+	 * hasn't been initialized or returns the existing one.
+	 * 
+	 * @return BlockChain
+	 * 			The blockchain of the sistem
+	 */
 	public static BlockChainRepository getInstance() {
 		if (singleChain == null) {
 			singleChain = new BlockChainRepository();
@@ -188,11 +202,13 @@ public class BlockChainRepository {
 	public double getBalance(String address) {
 		List<TransactionDto> sentTransactions = this.getSentTransactionsByAddress(address);
 		List<TransactionDto> receivedTransactions = this.getReceivedTransactionsByAddress(address);
+		List<TransactionDto> pendingTransactions = this.getPendingTransactionsByAddress(address);
 		
 		Double sent = sentTransactions.stream().mapToDouble(x -> x.amount).sum();
 		Double received = receivedTransactions.stream().mapToDouble(x -> x.amount).sum();
+		Double pending = pendingTransactions.stream().mapToDouble(x -> x.amount).sum();
 		
-		return received-sent;
+		return received-sent-pending;
 	}
 	
 	/**

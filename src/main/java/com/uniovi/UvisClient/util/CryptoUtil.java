@@ -5,6 +5,11 @@ import java.nio.charset.StandardCharsets;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
 
+/**
+ * Class with statics methods for cryptographic operations.
+ * @author Pelayo Díaz Soto
+ *
+ */
 public class CryptoUtil {
 	
 	/**

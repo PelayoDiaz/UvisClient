@@ -119,6 +119,21 @@
           <!-- End of Cards -->
           <hr>
           
+          <!-- Transactions Info -->
+          <div class="card shadow mb-4">
+             <!-- Card Header - Accordion -->
+             <a href="#collapseDescription" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDescription">
+                <h6 class="m-0 font-weight-bold text-primary" th:text="#{transaction.pending.title}">Pending Transactions</h6>
+             </a>
+             <!-- Card Content - Collapse -->
+            <div class="collapse show" id="collapseDescription">
+               <div class="card-body" th:text="#{transaction.pending.card.description}">
+                    
+              </div>
+            </div>
+          </div>
+          <!-- End of Transactions Info -->
+          
           <!-- Pending Transactions Table -->
           <div class="card shadow mb-4">
           	<div class="card-header py-3">

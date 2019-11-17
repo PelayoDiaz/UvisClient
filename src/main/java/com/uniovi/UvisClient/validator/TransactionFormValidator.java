@@ -10,6 +10,13 @@ import com.uniovi.UvisClient.entities.dto.TransactionDto;
 import com.uniovi.UvisClient.services.impl.BlockChainServiceImpl;
 import com.uniovi.UvisClient.services.impl.WalletServiceImpl;
 
+/**
+ * Validator for the send funds form.
+ * It checks if the data introduced is correct.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 @Component
 public class TransactionFormValidator implements Validator {
 	

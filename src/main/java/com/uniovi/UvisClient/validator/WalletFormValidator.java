@@ -10,6 +10,13 @@ import com.uniovi.UvisClient.entities.Wallet;
 import com.uniovi.UvisClient.services.impl.WalletServiceImpl;
 import com.uniovi.UvisClient.services.security.SecurityService;
 
+/**
+ * Validator for the create wallet form.
+ * It checks if the data introduced is correct.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 @Component
 public class WalletFormValidator implements Validator {
 

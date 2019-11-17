@@ -1,18 +1,14 @@
 package com.uniovi.UvisClient.services;
 
-import java.util.List;
-
 import com.uniovi.UvisClient.entities.User;
 
+/**
+ * Interface to contain all the methods that they relate with the users.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 public interface UserService {
-	
-	/**
-	 * Returns a list of all the users in the chain.
-	 * 
-	 * @return List<User>
-	 * 			The list of users in the application
-	 */
-	public List<User> getUsers();
 
 	/**
 	 * Adds a new User to the application.

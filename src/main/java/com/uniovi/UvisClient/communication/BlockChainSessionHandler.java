@@ -12,6 +12,12 @@ import com.uniovi.UvisClient.repositories.BlockChainRepository;
 
 import java.lang.reflect.Type;
 
+/**
+ * Handler to manage the communications.
+ * 
+ * @author Pelayo Díaz Soto
+ *
+ */
 public class BlockChainSessionHandler extends StompSessionHandlerAdapter {
 
 	private Logger logger = LogManager.getLogger(BlockChainSessionHandler.class);
