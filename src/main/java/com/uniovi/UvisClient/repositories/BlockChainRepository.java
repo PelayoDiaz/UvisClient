@@ -69,7 +69,7 @@ public class BlockChainRepository {
 	 * 			The number of connected nodes in the chain
 	 */
 	public int getConnectedNodes() {
-		return this.blockChainDto.nodes.size();
+		return (this.blockChainDto != null) ? this.blockChainDto.nodes.size() : 0;
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class BlockChainRepository {
 	 * 			The list of wallets
 	 */
 	public List<WalletDto> getWalletsList() {
-		return new ArrayList<WalletDto>(this.blockChainDto.wallets);
+		return (this.blockChainDto!=null) ? new ArrayList<WalletDto>(this.blockChainDto.wallets) : new ArrayList<WalletDto>();
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class BlockChainRepository {
 	 * 			The list of transactions.
 	 */
 	public List<TransactionDto> getPendingTransactionsList() {
-		return new ArrayList<TransactionDto>(this.blockChainDto.transactions);
+		return (this.blockChainDto != null) ? new ArrayList<TransactionDto>(this.blockChainDto.transactions) : new ArrayList<TransactionDto>();
 	}
 	
 	/**
@@ -102,8 +102,11 @@ public class BlockChainRepository {
 	 * 			The list of transactions.
 	 */
 	public List<TransactionDto> getPendingTransactionsByAddress(String address) {
-		List<TransactionDto> pendingTransactions = this.blockChainDto.transactions.stream()
-				.filter(x -> x.senderAddress.equals(address)).collect(Collectors.toList());
+		List<TransactionDto> pendingTransactions = new ArrayList<TransactionDto>();
+		if (this.blockChainDto != null) {
+			pendingTransactions = this.blockChainDto.transactions.stream()
+					.filter(x -> x.senderAddress.equals(address)).collect(Collectors.toList());
+		}
 		return pendingTransactions;
 	}
 	
@@ -117,8 +120,10 @@ public class BlockChainRepository {
 	 */
 	public List<TransactionDto> getSentTransactionsByAddress(String address) {
 		List<TransactionDto> sentTransactions = new ArrayList<TransactionDto>();
-		this.blockChainDto.chain.forEach(x -> sentTransactions.addAll(x.transactions.stream()
-				.filter(y -> y.senderAddress.equals(address)).collect(Collectors.toList())));
+		if (this.blockChainDto!=null) {
+			this.blockChainDto.chain.forEach(x -> sentTransactions.addAll(x.transactions.stream()
+					.filter(y -> y.senderAddress.equals(address)).collect(Collectors.toList())));
+		}
 		return sentTransactions;
 	}
 	
@@ -132,8 +137,10 @@ public class BlockChainRepository {
 	 */
 	public List<TransactionDto> getReceivedTransactionsByAddress(String address) {
 		List<TransactionDto> sentTransactions = new ArrayList<TransactionDto>();
-		this.blockChainDto.chain.forEach(x -> sentTransactions.addAll(x.transactions.stream()
-				.filter(y -> y.receiver.equals(address)).collect(Collectors.toList())));
+		if (this.blockChainDto!=null) {
+			this.blockChainDto.chain.forEach(x -> sentTransactions.addAll(x.transactions.stream()
+					.filter(y -> y.receiver.equals(address)).collect(Collectors.toList())));
+		}
 		return sentTransactions;
 	}
 	
@@ -146,9 +153,9 @@ public class BlockChainRepository {
 	 * 			The wallet. 
 	 */
 	public WalletDto getWallet(String address) {
-		return this.blockChainDto.wallets.stream()
-				.filter(x -> x.address.equals(address)).findFirst()
-				.orElse(null);
+		return (this.blockChainDto!=null) ? this.blockChainDto.wallets.stream()
+				.filter(x -> x.address.equals(address)).findFirst().orElse(null) 
+				: null;
 	}
 
 	/**
@@ -218,7 +225,7 @@ public class BlockChainRepository {
 	 * 			The number of blocks contained in the chain.
 	 */
 	public int getChainSize() {
-		return this.blockChainDto.chain.size();
+		return (this.blockChainDto != null) ? this.blockChainDto.chain.size() : 0;
 	}
 
 	/**
@@ -228,7 +235,7 @@ public class BlockChainRepository {
 	 * 			The number of processed transactions contained in the chain
 	 */
 	public int getTotalOfProcessedTransactions() {
-		return this.blockChainDto.chain.stream().mapToInt(x -> x.transactions.size()).sum();
+		return (this.blockChainDto != null) ? this.blockChainDto.chain.stream().mapToInt(x -> x.transactions.size()).sum() : 0;
 	}
 
 }
