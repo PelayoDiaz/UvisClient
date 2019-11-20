@@ -98,5 +98,13 @@ public interface BlockChainService {
 	 * 			The list of the user's wallets updated with the funds.
 	 */
 	public List<Wallet> updateFunds(User user);
+	
+	/**
+	 * Returns the number of connected nodes into the chain.
+	 * 
+	 * @return int
+	 * 			The number of connected nodes.
+	 */
+	public int getNumberOfConnectedNodes();
 
 }

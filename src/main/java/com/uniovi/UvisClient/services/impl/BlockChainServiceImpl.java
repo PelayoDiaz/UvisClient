@@ -66,5 +66,10 @@ public class BlockChainServiceImpl implements BlockChainService {
 		user.getWallets().forEach(x -> x.setFunds(this.getBalanceByAddress(x.getAddress())));
 		return new ArrayList<Wallet>(user.getWallets());
 	}
+
+	@Override
+	public int getNumberOfConnectedNodes() {
+		return BlockChainRepository.getInstance().getNumberOfConnectedNodes();
+	}
 	
 }

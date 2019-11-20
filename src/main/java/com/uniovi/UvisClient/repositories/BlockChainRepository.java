@@ -68,7 +68,7 @@ public class BlockChainRepository {
 	 * @return Integer
 	 * 			The number of connected nodes in the chain
 	 */
-	public int getConnectedNodes() {
+	public int getNumberOfConnectedNodes() {
 		return (this.blockChainDto != null) ? this.blockChainDto.nodes.size() : 0;
 	}
 	

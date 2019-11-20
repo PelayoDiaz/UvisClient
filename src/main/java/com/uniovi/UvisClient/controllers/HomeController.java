@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.uniovi.UvisClient.repositories.BlockChainRepository;
 import com.uniovi.UvisClient.services.BlockChainService;
 
 @Controller
@@ -18,7 +17,7 @@ public class HomeController {
 	
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
-		model.addAttribute("conectedNodes", BlockChainRepository.getInstance().getConnectedNodes());
+		model.addAttribute("conectedNodes", this.chainService.getNumberOfConnectedNodes());
 		model.addAttribute("blockNumber", this.chainService.getNumberOfBlocks());
 		model.addAttribute("processedTransactions", this.chainService.getTotalOfProcessedTransactions());
 		model.addAttribute("pendingTransactions", this.chainService.getPendingTransactions().size());
